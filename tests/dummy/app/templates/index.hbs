@@ -1,0 +1,87 @@
+<p>This is a simple wrapper around <a href="http://idangero.us/swiper/">Swiper</a>
+  by idangerous which itself is a pritty slick, touch-enabled carousel-library.</p>
+
+<p>As this was created out of a particular requirement, only those swiper-options
+  have been ported, which were needed. If you would like to use anything else you
+  see on <a href="http://idangero.us/swiper/demos/">their demos</a>, please create
+  a PullRequest or issue on github.</p>
+
+<h3>Basic usage</h3>
+
+{{#swiper-container}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
+
+<h3>Infinite + Pagination + extra classes</h3>
+
+{{#swiper-container pagination=true loop=true}}
+  {{#swiper-slide class='myslide myslide-1'}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-2'}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-3'}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-4'}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-5'}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container pagination=true loop=true}}
+    \{{#swiper-slide class='myslide myslide-1'}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide class='myslide myslide-2'}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide class='myslide myslide-3'}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide class='myslide myslide-4'}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide class='myslide myslide-5'}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
+
+<h3>Vertical + Pagination</h3>
+
+{{#swiper-container pagination=true vertical=true}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container vertical=true}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
+
+<h3>Centered Slides + pagination</h3>
+
+{{#swiper-container pagination=true centered=true slidesPerView=4 spaceBetween=5}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container pagination=true centered=true slidesPerView=4 spaceBetween=5}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
