@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-swiper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ember-wrapper for nolimits4web/Swiper v3",
   "directories": {
     "doc": "doc",
