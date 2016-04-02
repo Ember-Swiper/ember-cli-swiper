@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-swiper",
   "version": "0.1.1",
-  "description": "ember-wrapper for nolimits4web/Swiper v3",
+  "description": "Enables touchfriendly, swipeable, carousel-like slides through nolimits4web/Swiper",
   "directories": {
     "doc": "doc",
     "test": "tests"
