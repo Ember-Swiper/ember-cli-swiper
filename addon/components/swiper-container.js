@@ -42,6 +42,10 @@ export default Ember.Component.extend({
       options.freeModeSticky = true;
     }
 
+    if (this.get('grabCursor')) {
+      options.grabCursor = true;
+    }
+
     return options;
   }),
 
