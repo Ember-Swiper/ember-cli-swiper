@@ -64,7 +64,14 @@ export default Ember.Component.extend({
   currentSlideModified: Ember.observer('currentSlide', function() {
     Ember.run.later(this, () => {
       if (this.get('currentSlide') !== this.get('currentSlideInternal')) {
-        this.get('swiper').slideTo(this.get('currentSlide'));
+        let index = this.get('currentSlide');
+
+        if (this.get('loop')) {
+          let swiper = this.get('swiper');
+          index = Ember.$(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
+        }
+
+        this.get('swiper').slideTo(index);
         this.set('currentSlideInternal', this.get('currentSlide'));
       }
     });
