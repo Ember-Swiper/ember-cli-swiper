@@ -2035,7 +2035,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 150,
+            "line": 164,
             "column": 0
           }
         },
@@ -2354,6 +2354,40 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el1 = dom.createTextNode("\nCurrent Slideindex: ");
         dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container currentSlide=currentSlide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 3");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 4");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 5");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n\n  <br>\n  <a ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{action 'goToTwo'}} class=\"btn btn--s btn--gray\" style=\"float: right; cursor: pointer;\">Go to 2</a>\n  Current Slideindex: ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{currentSlide}}\n");
+        dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
