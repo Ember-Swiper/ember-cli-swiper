@@ -1,3 +1,7 @@
+body {
+  padding-bottom: 5em;
+}
+
 .swiper-container-vertical {
   height: 200px;
 }
@@ -37,4 +41,17 @@
 .swiper-wrapper .swiper-slide:nth-of-type(5):not(.myslide),
 .swiper-wrapper .swiper-slide.myslide-5 {
   background-color: #EDC951;
+}
+
+@media screen and (max-width: 840px) {
+  .measure {
+    padding: 1em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .measure h1 {
+    margin: 1.5em 0;
+    font-size: 2em;
+  }
 }

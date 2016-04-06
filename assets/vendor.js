@@ -71584,14 +71584,48 @@ define('ember-cli-swiper/components/swiper-container', ['exports', 'ember', 'emb
         options.centeredSlides = true;
       }
 
+      if (this.get('freeMode')) {
+        options.freeMode = true;
+      }
+
+      if (this.get('freeModeSticky')) {
+        options.freeModeSticky = true;
+      }
+
+      if (this.get('grabCursor')) {
+        options.grabCursor = true;
+      }
+
+      options.onSlideChangeEnd = this.slideChanged.bind(this);
+
       return options;
     }),
 
-    initSwiper: _ember['default'].on('init', function () {
+    slideChanged: function slideChanged(swiper) {
+      this.set('currentSlideInternal', swiper.activeIndex);
+      this.set('currentSlide', swiper.activeIndex);
+
+      if (this.get('onChange')) {
+        this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
+      }
+    },
+
+    currentSlideModified: _ember['default'].observer('currentSlide', function () {
       var _this = this;
 
       _ember['default'].run.later(this, function () {
-        _this.set('swiper', new Swiper('#' + _this.get('elementId'), _this.get('swiperOptions')));
+        if (_this.get('currentSlide') !== _this.get('currentSlideInternal')) {
+          _this.get('swiper').slideTo(_this.get('currentSlide'));
+          _this.set('currentSlideInternal', _this.get('currentSlide'));
+        }
+      });
+    }),
+
+    initSwiper: _ember['default'].on('init', function () {
+      var _this2 = this;
+
+      _ember['default'].run.later(this, function () {
+        _this2.set('swiper', new Swiper('#' + _this2.get('elementId'), _this2.get('swiperOptions')));
       });
     })
 
@@ -87341,7 +87375,7 @@ define('ember-data/transform', ['exports', 'ember'], function (exports, _ember) 
 define("ember-data/version", ["exports"], function (exports) {
   "use strict";
 
-  exports["default"] = "2.4.3";
+  exports["default"] = "2.4.3+a3e2521f85";
 });
 define("ember-inflector/index", ["exports", "ember", "ember-inflector/lib/system", "ember-inflector/lib/ext/string"], function (exports, _ember, _emberInflectorLibSystem, _emberInflectorLibExtString) {
   /* global define, module */

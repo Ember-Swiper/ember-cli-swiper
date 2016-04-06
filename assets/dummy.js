@@ -51,6 +51,24 @@ define('dummy/components/swiper-slide', ['exports', 'ember-cli-swiper/components
 define('dummy/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
+define('dummy/controllers/index', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Controller.extend({
+    selectionHistory: '',
+
+    actions: {
+
+      addToHistory: function addToHistory(newElement) {
+        this.set('selectionHistory', '' + _ember['default'].$(newElement).text() + this.get('selectionHistory'));
+      },
+
+      goToTwo: function goToTwo() {
+        this.set('currentSlide', 2);
+      }
+
+    }
+
+  });
+});
 define('dummy/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
@@ -1277,6 +1295,732 @@ define("dummy/templates/index", ["exports"], function (exports) {
         templates: [child0, child1, child2, child3, child4]
       };
     })();
+    var child4 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 92,
+                "column": 2
+              },
+              "end": {
+                "line": 92,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 1");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 93,
+                "column": 2
+              },
+              "end": {
+                "line": 93,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 2");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 94,
+                "column": 2
+              },
+              "end": {
+                "line": 94,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 3");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child3 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 95,
+                "column": 2
+              },
+              "end": {
+                "line": 95,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 4");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child4 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 96,
+                "column": 2
+              },
+              "end": {
+                "line": 96,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 5");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 91,
+              "column": 0
+            },
+            "end": {
+              "line": 97,
+              "column": 0
+            }
+          },
+          "moduleName": "dummy/templates/index.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(5);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          morphs[3] = dom.createMorphAt(fragment, 7, 7, contextualElement);
+          morphs[4] = dom.createMorphAt(fragment, 9, 9, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "swiper-slide", [], [], 0, null, ["loc", [null, [92, 2], [92, 43]]]], ["block", "swiper-slide", [], [], 1, null, ["loc", [null, [93, 2], [93, 43]]]], ["block", "swiper-slide", [], [], 2, null, ["loc", [null, [94, 2], [94, 43]]]], ["block", "swiper-slide", [], [], 3, null, ["loc", [null, [95, 2], [95, 43]]]], ["block", "swiper-slide", [], [], 4, null, ["loc", [null, [96, 2], [96, 43]]]]],
+        locals: [],
+        templates: [child0, child1, child2, child3, child4]
+      };
+    })();
+    var child5 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 114,
+                "column": 2
+              },
+              "end": {
+                "line": 114,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 1");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 115,
+                "column": 2
+              },
+              "end": {
+                "line": 115,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 2");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 116,
+                "column": 2
+              },
+              "end": {
+                "line": 116,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 3");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child3 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 117,
+                "column": 2
+              },
+              "end": {
+                "line": 117,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 4");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child4 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 118,
+                "column": 2
+              },
+              "end": {
+                "line": 118,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 5");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 113,
+              "column": 0
+            },
+            "end": {
+              "line": 119,
+              "column": 0
+            }
+          },
+          "moduleName": "dummy/templates/index.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(5);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          morphs[3] = dom.createMorphAt(fragment, 7, 7, contextualElement);
+          morphs[4] = dom.createMorphAt(fragment, 9, 9, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "swiper-slide", [], [], 0, null, ["loc", [null, [114, 2], [114, 43]]]], ["block", "swiper-slide", [], [], 1, null, ["loc", [null, [115, 2], [115, 43]]]], ["block", "swiper-slide", [], [], 2, null, ["loc", [null, [116, 2], [116, 43]]]], ["block", "swiper-slide", [], [], 3, null, ["loc", [null, [117, 2], [117, 43]]]], ["block", "swiper-slide", [], [], 4, null, ["loc", [null, [118, 2], [118, 43]]]]],
+        locals: [],
+        templates: [child0, child1, child2, child3, child4]
+      };
+    })();
+    var child6 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 140,
+                "column": 2
+              },
+              "end": {
+                "line": 140,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 1");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 141,
+                "column": 2
+              },
+              "end": {
+                "line": 141,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 2");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 142,
+                "column": 2
+              },
+              "end": {
+                "line": 142,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 3");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child3 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 143,
+                "column": 2
+              },
+              "end": {
+                "line": 143,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 4");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child4 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 144,
+                "column": 2
+              },
+              "end": {
+                "line": 144,
+                "column": 26
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 5");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 139,
+              "column": 0
+            },
+            "end": {
+              "line": 145,
+              "column": 0
+            }
+          },
+          "moduleName": "dummy/templates/index.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(5);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          morphs[3] = dom.createMorphAt(fragment, 7, 7, contextualElement);
+          morphs[4] = dom.createMorphAt(fragment, 9, 9, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "swiper-slide", [], [], 0, null, ["loc", [null, [140, 2], [140, 43]]]], ["block", "swiper-slide", [], [], 1, null, ["loc", [null, [141, 2], [141, 43]]]], ["block", "swiper-slide", [], [], 2, null, ["loc", [null, [142, 2], [142, 43]]]], ["block", "swiper-slide", [], [], 3, null, ["loc", [null, [143, 2], [143, 43]]]], ["block", "swiper-slide", [], [], 4, null, ["loc", [null, [144, 2], [144, 43]]]]],
+        locals: [],
+        templates: [child0, child1, child2, child3, child4]
+      };
+    })();
     return {
       meta: {
         "fragmentReason": {
@@ -1291,7 +2035,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 88,
+            "line": 150,
             "column": 0
           }
         },
@@ -1422,7 +2166,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el1 = dom.createElement("pre");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("{{#swiper-container vertical=true}}\n    ");
+        var el2 = dom.createTextNode("{{#swiper-container pagination=true vertical=true}}\n    ");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
         dom.appendChild(el1, el2);
@@ -1450,7 +2194,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("h3");
-        var el2 = dom.createTextNode("Centered Slides + pagination");
+        var el2 = dom.createTextNode("Vertical + Free & Sticky");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
@@ -1462,7 +2206,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el1 = dom.createElement("pre");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("{{#swiper-container pagination=true centered=true slidesPerView=4 spaceBetween=5}}\n    ");
+        var el2 = dom.createTextNode("{{#swiper-container freeMode=true freeModeSticky=true vertical=true}}\n    ");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
         dom.appendChild(el1, el2);
@@ -1487,21 +2231,152 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el2 = dom.createTextNode("{{/swiper-container}}\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createTextNode("Centered Slides + Pagination + Cursor");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container grabCursor=true pagination=true centered=true slidesPerView=4 spaceBetween=5}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 3");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 4");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 5");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createTextNode("Change Listener");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createTextNode("The configured action receives the HTML-Element of the selected slide.");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("textarea");
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container onChange='addToHistory'}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 3");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 4");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 5");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n\n  <br>\n  <textarea>");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{selectionHistory}}</textarea>\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createTextNode("2 way binded index");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("a");
+        dom.setAttribute(el1, "class", "btn btn--s btn--gray");
+        dom.setAttribute(el1, "style", "float: right; cursor: pointer;");
+        var el2 = dom.createTextNode("Go to 2");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\nCurrent Slideindex: ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(4);
+        var element0 = dom.childAt(fragment, [52]);
+        var morphs = new Array(10);
         morphs[0] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         morphs[1] = dom.createMorphAt(fragment, 12, 12, contextualElement);
         morphs[2] = dom.createMorphAt(fragment, 18, 18, contextualElement);
         morphs[3] = dom.createMorphAt(fragment, 24, 24, contextualElement);
+        morphs[4] = dom.createMorphAt(fragment, 30, 30, contextualElement);
+        morphs[5] = dom.createMorphAt(fragment, 38, 38, contextualElement);
+        morphs[6] = dom.createMorphAt(dom.childAt(fragment, [42]), 0, 0);
+        morphs[7] = dom.createMorphAt(fragment, 48, 48, contextualElement);
+        morphs[8] = dom.createElementMorph(element0);
+        morphs[9] = dom.createMorphAt(fragment, 54, 54, contextualElement);
         return morphs;
       },
-      statements: [["block", "swiper-container", [], [], 0, null, ["loc", [null, [11, 0], [17, 21]]]], ["block", "swiper-container", [], ["pagination", true, "loop", true], 1, null, ["loc", [null, [31, 0], [37, 21]]]], ["block", "swiper-container", [], ["pagination", true, "vertical", true], 2, null, ["loc", [null, [51, 0], [57, 21]]]], ["block", "swiper-container", [], ["pagination", true, "centered", true, "slidesPerView", 4, "spaceBetween", 5], 3, null, ["loc", [null, [71, 0], [77, 21]]]]],
+      statements: [["block", "swiper-container", [], [], 0, null, ["loc", [null, [11, 0], [17, 21]]]], ["block", "swiper-container", [], ["pagination", true, "loop", true], 1, null, ["loc", [null, [31, 0], [37, 21]]]], ["block", "swiper-container", [], ["pagination", true, "vertical", true], 2, null, ["loc", [null, [51, 0], [57, 21]]]], ["block", "swiper-container", [], ["freeMode", true, "freeModeSticky", true, "vertical", true], 3, null, ["loc", [null, [71, 0], [77, 21]]]], ["block", "swiper-container", [], ["grabCursor", true, "pagination", true, "centered", true, "slidesPerView", 4, "spaceBetween", 5], 4, null, ["loc", [null, [91, 0], [97, 21]]]], ["block", "swiper-container", [], ["onChange", "addToHistory"], 5, null, ["loc", [null, [113, 0], [119, 21]]]], ["content", "selectionHistory", ["loc", [null, [122, 10], [122, 30]]]], ["block", "swiper-container", [], ["currentSlide", ["subexpr", "@mut", [["get", "currentSlide", ["loc", [null, [139, 33], [139, 45]]]]], [], []]], 6, null, ["loc", [null, [139, 0], [145, 21]]]], ["element", "action", ["goToTwo"], [], ["loc", [null, [148, 3], [148, 23]]]], ["content", "currentSlide", ["loc", [null, [149, 20], [149, 36]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3]
+      templates: [child0, child1, child2, child3, child4, child5, child6]
     };
   })());
 });
@@ -1537,7 +2412,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("dummy/app")["default"].create({"name":"ember-cli-swiper","version":"0.1.0+7698689c"});
+  require("dummy/app")["default"].create({"name":"ember-cli-swiper","version":"v0.2.2"});
 }
 
 /* jshint ignore:end */

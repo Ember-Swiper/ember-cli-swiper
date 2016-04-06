@@ -15,6 +15,23 @@ define('dummy/tests/app.jshint', ['exports'], function (exports) {
     assert.ok(true, 'app.js should pass jshint.');
   });
 });
+define('dummy/tests/controllers/index.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - controllers');
+  test('controllers/index.js should pass jscs', function () {
+    ok(true, 'controllers/index.js should pass jscs.');
+  });
+});
+define('dummy/tests/controllers/index.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - controllers/index.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/index.js should pass jshint.');
+  });
+});
 define('dummy/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -48,13 +65,13 @@ define('dummy/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'dummy/
         this.application = (0, _dummyTestsHelpersStartApp['default'])();
 
         if (options.beforeEach) {
-          options.beforeEach.apply(this, arguments);
+          options.beforeEach.apply(options, arguments);
         }
       },
 
       afterEach: function afterEach() {
         if (options.afterEach) {
-          options.afterEach.apply(this, arguments);
+          options.afterEach.apply(options, arguments);
         }
 
         (0, _dummyTestsHelpersDestroyApp['default'])(this.application);
@@ -67,7 +84,7 @@ define('dummy/tests/helpers/module-for-acceptance.jscs-test', ['exports'], funct
 
   module('JSCS - helpers');
   test('helpers/module-for-acceptance.js should pass jscs', function () {
-    ok(false, 'helpers/module-for-acceptance.js should pass jscs.\nrequireSpread: Illegal use of apply method. Use the spread operator instead at helpers/module-for-acceptance.js :\n     9 |\n    10 |      if (options.beforeEach) {\n    11 |        options.beforeEach.apply(this, arguments);\n-----------------------------------^\n    12 |      }\n    13 |    },\nrequireSpread: Illegal use of apply method. Use the spread operator instead at helpers/module-for-acceptance.js :\n    15 |    afterEach() {\n    16 |      if (options.afterEach) {\n    17 |        options.afterEach.apply(this, arguments);\n----------------------------------^\n    18 |      }\n    19 |');
+    ok(true, 'helpers/module-for-acceptance.js should pass jscs.');
   });
 });
 define('dummy/tests/helpers/module-for-acceptance.jshint', ['exports'], function (exports) {
@@ -149,9 +166,6 @@ define('dummy/tests/integration/components/swiper-container-test', ['exports', '
   });
 
   (0, _emberQunit.test)('it renders', function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
@@ -194,10 +208,8 @@ define('dummy/tests/integration/components/swiper-container-test', ['exports', '
         templates: []
       };
     })()));
-
     assert.equal(this.$().text().trim(), '');
 
-    // Template block usage:
     this.render(Ember.HTMLBars.template((function () {
       var child0 = (function () {
         return {
@@ -278,8 +290,345 @@ define('dummy/tests/integration/components/swiper-container-test', ['exports', '
         templates: [child0]
       };
     })()));
-
     assert.equal(this.$().text().trim(), 'template block text');
+  });
+
+  (0, _emberQunit.test)('predefined classes are added', function (assert) {
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 26
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 47
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-container', [], [], 0, null, ['loc', [null, [1, 0], [1, 47]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').hasClass('swiper-container'));
+  });
+
+  (0, _emberQunit.test)('contains the wrapper', function (assert) {
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 26
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 47
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-container', [], [], 0, null, ['loc', [null, [1, 0], [1, 47]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').has('.swiper-wrapper').length);
+  });
+
+  (0, _emberQunit.test)('pagination node is present if requested', function (assert) {
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 43
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 64
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-container', [], ['pagination', false], 0, null, ['loc', [null, [1, 0], [1, 64]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.notOk(this.$('>:first-child').has('.swiper-pagination').length);
+
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 42
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 63
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-container', [], ['pagination', true], 0, null, ['loc', [null, [1, 0], [1, 63]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
   });
 });
 define('dummy/tests/integration/components/swiper-container-test.jscs-test', ['exports'], function (exports) {
@@ -306,9 +655,6 @@ define('dummy/tests/integration/components/swiper-slide-test', ['exports', 'embe
   });
 
   (0, _emberQunit.test)('it renders', function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
@@ -351,10 +697,8 @@ define('dummy/tests/integration/components/swiper-slide-test', ['exports', 'embe
         templates: []
       };
     })()));
-
     assert.equal(this.$().text().trim(), '');
 
-    // Template block usage:
     this.render(Ember.HTMLBars.template((function () {
       var child0 = (function () {
         return {
@@ -435,8 +779,261 @@ define('dummy/tests/integration/components/swiper-slide-test', ['exports', 'embe
         templates: [child0]
       };
     })()));
-
     assert.equal(this.$().text().trim(), 'template block text');
+  });
+
+  (0, _emberQunit.test)('predefined classes are added', function (assert) {
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 22
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 39
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-slide', [], [], 0, null, ['loc', [null, [1, 0], [1, 39]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
+
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 38
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 55
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-slide', [], ['class', 'foo bar'], 0, null, ['loc', [null, [1, 0], [1, 55]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
+  });
+
+  (0, _emberQunit.test)('own classes are added', function (assert) {
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': {
+              'name': 'missing-wrapper',
+              'problems': ['wrong-type']
+            },
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 1,
+                'column': 0
+              },
+              'end': {
+                'line': 1,
+                'column': 38
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(' Foo ');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 55
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['block', 'swiper-slide', [], ['class', 'foo bar'], 0, null, ['loc', [null, [1, 0], [1, 55]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+    assert.ok(this.$('>:first-child').hasClass('foo'));
+    assert.ok(this.$('>:first-child').hasClass('bar'));
   });
 });
 define('dummy/tests/integration/components/swiper-slide-test.jscs-test', ['exports'], function (exports) {
