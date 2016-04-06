@@ -34,6 +34,14 @@ export default Ember.Component.extend({
       options.centeredSlides = true;
     }
 
+    if (this.get('freeMode')) {
+      options.freeMode = true;
+    }
+
+    if (this.get('freeModeSticky')) {
+      options.freeModeSticky = true;
+    }
+
     return options;
   }),
 
