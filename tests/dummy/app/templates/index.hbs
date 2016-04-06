@@ -158,6 +158,31 @@ Current Slideindex: {{currentSlide}}
   \{{/swiper-container}}
 
   &lt;br&gt;
-  &lt;a \{{action 'goToTwo'}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;"&gt;Go to 2&lt;/a&gt;
+  &lt;a \{{action 'goToTwo'}} &gt;Go to 2&lt;/a&gt;
   Current Slideindex: \{{currentSlide}}
+</pre>
+
+<h4>¡ Atención, Atención !</h4>
+
+<p>Please note that, in difference to a bare Swiper, this will always return <em>the correct</em>
+  Index of the current slide. Even in loops.</p>
+
+{{#swiper-container currentSlide=currentSlide2 loop=true centered=true slidesPerView=4}}
+  {{#swiper-slide class='myslide myslide-1'}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-2'}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-3'}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-4'}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide class='myslide myslide-5'}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+Current Slideindex: {{currentSlide2}}
+
+<pre>
+  \{{#swiper-container currentSlide=currentSlide2 loop=true centered=true slidesPerView=4}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+  Current Slideindex: \{{currentSlide2}}
 </pre>
