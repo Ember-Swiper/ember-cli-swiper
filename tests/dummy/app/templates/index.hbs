@@ -105,3 +105,45 @@
     \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
   \{{/swiper-container}}
 </pre>
+
+<h3>Change Listener</h3>
+
+<p>The configured action receives the HTML-Element of the selected slide.</p>
+
+{{#swiper-container onChange='addToHistory'}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<br>
+<textarea>{{selectionHistory}}</textarea>
+
+<pre>
+  \{{#swiper-container onChange='addToHistory'}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+
+  &lt;br&gt;
+  &lt;textarea&gt;\{{selectionHistory}}&lt;/textarea&gt;
+</pre>
+
+<h3>2 way binded index</h3>
+
+{{#swiper-container currentSlide=currentSlide}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<br>
+<a {{action 'goToTwo'}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;">Go to 2</a>
+Current Slideindex: {{currentSlide}}

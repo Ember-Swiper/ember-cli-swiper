@@ -46,7 +46,27 @@ export default Ember.Component.extend({
       options.grabCursor = true;
     }
 
+    options.onSlideChangeEnd = this.slideChanged.bind(this);
+
     return options;
+  }),
+
+  slideChanged(swiper) {
+    this.set('currentSlideInternal', swiper.activeIndex);
+    this.set('currentSlide', swiper.activeIndex);
+
+    if (this.get('onChange')) {
+      this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
+    }
+  },
+
+  currentSlideModified: Ember.observer('currentSlide', function() {
+    Ember.run.later(this, () => {
+      if (this.get('currentSlide') !== this.get('currentSlideInternal')) {
+        this.get('swiper').slideTo(this.get('currentSlide'));
+        this.set('currentSlideInternal', this.get('currentSlide'));
+      }
+    });
   }),
 
   initSwiper: Ember.on('init', function() {
