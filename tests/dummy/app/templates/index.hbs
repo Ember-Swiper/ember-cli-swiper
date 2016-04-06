@@ -147,3 +147,17 @@
 <br>
 <a {{action 'goToTwo'}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;">Go to 2</a>
 Current Slideindex: {{currentSlide}}
+
+<pre>
+  \{{#swiper-container currentSlide=currentSlide}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+
+  &lt;br&gt;
+  &lt;a \{{action 'goToTwo'}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;"&gt;Go to 2&lt;/a&gt;
+  Current Slideindex: \{{currentSlide}}
+</pre>
