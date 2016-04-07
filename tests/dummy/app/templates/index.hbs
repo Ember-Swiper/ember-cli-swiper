@@ -186,3 +186,14 @@ Current Slideindex: {{currentSlide2}}
   \{{/swiper-container}}
   Current Slideindex: \{{currentSlide2}}
 </pre>
+
+<h3>Triggering an update</h3>
+<p>If you find yourself adding/removing slides, you need to 'update' the swipe-container.</p>
+<p>You can do so by referencing a variable to observe for changes. This is usually your list of slides</p>
+
+<pre>
+  \{{#swiper-container updateFor=propertyToWatch}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>

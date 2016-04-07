@@ -51,6 +51,10 @@ export default Ember.Component.extend({
     return options;
   }),
 
+  updateTriggered: Ember.observer('updateFor', function() {
+    Ember.run.once(this, this.get('swiper').update);
+  }),
+
   slideChanged(swiper) {
     let index = this.get('loop') ? Ember.$(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
     this.set('currentSlideInternal', index);
