@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   layout,
   classNames: ['swiper-container'],
   swiper: false,
+  hasAttemptedRecovery: false,
 
   swiperOptions: Ember.computed('pagination', 'loop', 'vertical', function() {
     let options = {};
@@ -51,8 +52,13 @@ export default Ember.Component.extend({
     return options;
   }),
 
-  updateTriggered: Ember.observer('updateFor', function() {
-    Ember.run.once(this, this.get('swiper').update);
+  updateTriggered: Ember.observer('updateFor', 'hasAttemptedRecovery', function() {
+    Ember.run.once(this, () => {
+      this.get('swiper').update();
+      Ember.run.once(this, () => {
+        this.notifyPropertyChange('currentSlide');
+      });
+    });
   }),
 
   slideChanged(swiper) {
@@ -75,8 +81,12 @@ export default Ember.Component.extend({
           index = Ember.$(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
         }
 
-        this.get('swiper').slideTo(index);
-        this.set('currentSlideInternal', this.get('currentSlide'));
+        var didSlide = this.get('swiper').slideTo(index);
+        if ( didSlide || this.get('hasAttemptedRecovery') ) {
+          this.set('currentSlideInternal', this.get('currentSlide'));
+        } else {
+          this.set('hasAttemptedRecovery', true);
+        }
       }
     });
   }),
