@@ -6,6 +6,8 @@ See the [demo](http://suven.github.io/ember-cli-swiper/) for examples and usage-
 
 ## Installation
 
+Make sure you are using a somewhat recent version of nodejs when installing. Everything > 4 should be fine.
+
 `ember install ember-cli-swiper`
 
 ## Usage
@@ -21,3 +23,9 @@ See the [demo](http://suven.github.io/ember-cli-swiper/) for examples and usage-
 ```
 
 For all supported options see the [demo](http://suven.github.io/ember-cli-swiper/).
+
+## Running tests
+
+The test-execution requires you to have phantomjs 2.x.x installed.
+
+`ember test`
