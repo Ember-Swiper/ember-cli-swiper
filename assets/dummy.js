@@ -2021,6 +2021,248 @@ define("dummy/templates/index", ["exports"], function (exports) {
         templates: [child0, child1, child2, child3, child4]
       };
     })();
+    var child7 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 171,
+                "column": 2
+              },
+              "end": {
+                "line": 171,
+                "column": 52
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 1");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 172,
+                "column": 2
+              },
+              "end": {
+                "line": 172,
+                "column": 52
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 2");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 173,
+                "column": 2
+              },
+              "end": {
+                "line": 173,
+                "column": 52
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 3");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child3 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 174,
+                "column": 2
+              },
+              "end": {
+                "line": 174,
+                "column": 52
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 4");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child4 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 175,
+                "column": 2
+              },
+              "end": {
+                "line": 175,
+                "column": 52
+              }
+            },
+            "moduleName": "dummy/templates/index.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Slide 5");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 170,
+              "column": 0
+            },
+            "end": {
+              "line": 176,
+              "column": 0
+            }
+          },
+          "moduleName": "dummy/templates/index.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(5);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          morphs[3] = dom.createMorphAt(fragment, 7, 7, contextualElement);
+          morphs[4] = dom.createMorphAt(fragment, 9, 9, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "swiper-slide", [], ["class", "myslide myslide-1"], 0, null, ["loc", [null, [171, 2], [171, 69]]]], ["block", "swiper-slide", [], ["class", "myslide myslide-2"], 1, null, ["loc", [null, [172, 2], [172, 69]]]], ["block", "swiper-slide", [], ["class", "myslide myslide-3"], 2, null, ["loc", [null, [173, 2], [173, 69]]]], ["block", "swiper-slide", [], ["class", "myslide myslide-4"], 3, null, ["loc", [null, [174, 2], [174, 69]]]], ["block", "swiper-slide", [], ["class", "myslide myslide-5"], 4, null, ["loc", [null, [175, 2], [175, 69]]]]],
+        locals: [],
+        templates: [child0, child1, child2, child3, child4]
+      };
+    })();
     return {
       meta: {
         "fragmentReason": {
@@ -2035,7 +2277,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 164,
+            "line": 221,
             "column": 0
           }
         },
@@ -2384,9 +2626,174 @@ define("dummy/templates/index", ["exports"], function (exports) {
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("{{/swiper-container}}\n\n  <br>\n  <a ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("{{action 'goToTwo'}} class=\"btn btn--s btn--gray\" style=\"float: right; cursor: pointer;\">Go to 2</a>\n  Current Slideindex: ");
+        var el2 = dom.createTextNode("{{action 'goToTwo'}} >Go to 2</a>\n  Current Slideindex: ");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("{{currentSlide}}\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h4");
+        var el2 = dom.createTextNode("¡ Atención, Atención !");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createTextNode("Please note that, in difference to a bare Swiper, this will always return ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("em");
+        var el3 = dom.createTextNode("the correct");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  Index of the current slide. Even in loops.");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("Current Slideindex: ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container currentSlide=currentSlide2 loop=true centered=true slidesPerView=4}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 3");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 4");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 5");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n  Current Slideindex: ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{currentSlide2}}\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createTextNode("Triggering an update");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createTextNode("If you find yourself adding/removing slides, you need to 'update' the swipe-container.");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createTextNode("You can do so by referencing a variable to observe for changes. This is usually your list of slides");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container updateFor=propertyToWatch}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createTextNode("Forcing an update/repaint directly");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createTextNode("Swiper as shown to be a little bit touchy when it comes to situations where you show it via css / manipulate\n  the container after initialization. For those scenarios you can force a refresh of the component via your\n  controller");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        var el2 = dom.createElement("code");
+        var el3 = dom.createTextNode("forceUpdate()");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode(" also comes with an otional bool parameter ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("code");
+        var el3 = dom.createTextNode("updateTranslate");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode(" which\n  defaults to false. See ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("a");
+        dom.setAttribute(el2, "href", "http://idangero.us/swiper/api/#methods");
+        var el3 = dom.createTextNode("the Swiper docs");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode(" for more details.");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("strong");
+        var el2 = dom.createTextNode("Template");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-container registerAs=superDuperSwiper}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 1");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{#swiper-slide}}Slide 2");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-slide}}\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("{{/swiper-container}}\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("strong");
+        var el2 = dom.createTextNode("Controller");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("pre");
+        var el2 = dom.createTextNode("  modalHiddenOrSmthLikeThat() {\n    this.get('superDuperSwiper').forceUpdate();\n  }\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -2395,7 +2802,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [52]);
-        var morphs = new Array(10);
+        var morphs = new Array(12);
         morphs[0] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         morphs[1] = dom.createMorphAt(fragment, 12, 12, contextualElement);
         morphs[2] = dom.createMorphAt(fragment, 18, 18, contextualElement);
@@ -2406,11 +2813,13 @@ define("dummy/templates/index", ["exports"], function (exports) {
         morphs[7] = dom.createMorphAt(fragment, 48, 48, contextualElement);
         morphs[8] = dom.createElementMorph(element0);
         morphs[9] = dom.createMorphAt(fragment, 54, 54, contextualElement);
+        morphs[10] = dom.createMorphAt(fragment, 62, 62, contextualElement);
+        morphs[11] = dom.createMorphAt(fragment, 64, 64, contextualElement);
         return morphs;
       },
-      statements: [["block", "swiper-container", [], [], 0, null, ["loc", [null, [11, 0], [17, 21]]]], ["block", "swiper-container", [], ["pagination", true, "loop", true], 1, null, ["loc", [null, [31, 0], [37, 21]]]], ["block", "swiper-container", [], ["pagination", true, "vertical", true], 2, null, ["loc", [null, [51, 0], [57, 21]]]], ["block", "swiper-container", [], ["freeMode", true, "freeModeSticky", true, "vertical", true], 3, null, ["loc", [null, [71, 0], [77, 21]]]], ["block", "swiper-container", [], ["grabCursor", true, "pagination", true, "centered", true, "slidesPerView", 4, "spaceBetween", 5], 4, null, ["loc", [null, [91, 0], [97, 21]]]], ["block", "swiper-container", [], ["onChange", "addToHistory"], 5, null, ["loc", [null, [113, 0], [119, 21]]]], ["content", "selectionHistory", ["loc", [null, [122, 10], [122, 30]]]], ["block", "swiper-container", [], ["currentSlide", ["subexpr", "@mut", [["get", "currentSlide", ["loc", [null, [139, 33], [139, 45]]]]], [], []]], 6, null, ["loc", [null, [139, 0], [145, 21]]]], ["element", "action", ["goToTwo"], [], ["loc", [null, [148, 3], [148, 23]]]], ["content", "currentSlide", ["loc", [null, [149, 20], [149, 36]]]]],
+      statements: [["block", "swiper-container", [], [], 0, null, ["loc", [null, [11, 0], [17, 21]]]], ["block", "swiper-container", [], ["pagination", true, "loop", true], 1, null, ["loc", [null, [31, 0], [37, 21]]]], ["block", "swiper-container", [], ["pagination", true, "vertical", true], 2, null, ["loc", [null, [51, 0], [57, 21]]]], ["block", "swiper-container", [], ["freeMode", true, "freeModeSticky", true, "vertical", true], 3, null, ["loc", [null, [71, 0], [77, 21]]]], ["block", "swiper-container", [], ["grabCursor", true, "pagination", true, "centered", true, "slidesPerView", 4, "spaceBetween", 5], 4, null, ["loc", [null, [91, 0], [97, 21]]]], ["block", "swiper-container", [], ["onChange", "addToHistory"], 5, null, ["loc", [null, [113, 0], [119, 21]]]], ["content", "selectionHistory", ["loc", [null, [122, 10], [122, 30]]]], ["block", "swiper-container", [], ["currentSlide", ["subexpr", "@mut", [["get", "currentSlide", ["loc", [null, [139, 33], [139, 45]]]]], [], []]], 6, null, ["loc", [null, [139, 0], [145, 21]]]], ["element", "action", ["goToTwo"], [], ["loc", [null, [148, 3], [148, 23]]]], ["content", "currentSlide", ["loc", [null, [149, 20], [149, 36]]]], ["block", "swiper-container", [], ["currentSlide", ["subexpr", "@mut", [["get", "currentSlide2", ["loc", [null, [170, 33], [170, 46]]]]], [], []], "loop", true, "centered", true, "slidesPerView", 4], 7, null, ["loc", [null, [170, 0], [176, 21]]]], ["content", "currentSlide2", ["loc", [null, [177, 20], [177, 37]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7]
     };
   })());
 });
@@ -2446,7 +2855,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("dummy/app")["default"].create({"name":"ember-cli-swiper","version":"v0.2.2"});
+  require("dummy/app")["default"].create({"name":"ember-cli-swiper","version":"0.2.4+77e32206"});
 }
 
 /* jshint ignore:end */

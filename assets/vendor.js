@@ -71601,9 +71601,19 @@ define('ember-cli-swiper/components/swiper-container', ['exports', 'ember', 'emb
       return options;
     }),
 
+    updateTriggered: _ember['default'].observer('updateFor', function () {
+      _ember['default'].run.once(this, this.get('swiper').update);
+    }),
+
+    forceUpdate: function forceUpdate(updateTranslate) {
+      this.get('swiper').update(updateTranslate === undefined ? false : updateTranslate);
+      this.get('swiper').slideTo(this.get('currentSlide'));
+    },
+
     slideChanged: function slideChanged(swiper) {
-      this.set('currentSlideInternal', swiper.activeIndex);
-      this.set('currentSlide', swiper.activeIndex);
+      var index = this.get('loop') ? _ember['default'].$(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
+      this.set('currentSlideInternal', index);
+      this.set('currentSlide', index);
 
       if (this.get('onChange')) {
         this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
@@ -71615,7 +71625,14 @@ define('ember-cli-swiper/components/swiper-container', ['exports', 'ember', 'emb
 
       _ember['default'].run.later(this, function () {
         if (_this.get('currentSlide') !== _this.get('currentSlideInternal')) {
-          _this.get('swiper').slideTo(_this.get('currentSlide'));
+          var index = _this.get('currentSlide');
+
+          if (_this.get('loop')) {
+            var swiper = _this.get('swiper');
+            index = _ember['default'].$(swiper.slides).filter('[data-swiper-slide-index=' + _this.get('currentSlide') + ']').prevAll().length;
+          }
+
+          _this.get('swiper').slideTo(index);
           _this.set('currentSlideInternal', _this.get('currentSlide'));
         }
       });
@@ -71626,6 +71643,7 @@ define('ember-cli-swiper/components/swiper-container', ['exports', 'ember', 'emb
 
       _ember['default'].run.later(this, function () {
         _this2.set('swiper', new Swiper('#' + _this2.get('elementId'), _this2.get('swiperOptions')));
+        _this2.set('registerAs', _this2);
       });
     })
 
