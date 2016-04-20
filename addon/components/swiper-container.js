@@ -55,6 +55,11 @@ export default Ember.Component.extend({
     Ember.run.once(this, this.get('swiper').update);
   }),
 
+  forceUpdate(updateTranslate) {
+    this.get('swiper').update(updateTranslate === undefined ? false : updateTranslate);
+    this.get('swiper').slideTo(this.get('currentSlide'));
+  },
+
   slideChanged(swiper) {
     let index = this.get('loop') ? Ember.$(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
     this.set('currentSlideInternal', index);
@@ -84,6 +89,7 @@ export default Ember.Component.extend({
   initSwiper: Ember.on('init', function() {
     Ember.run.later(this, () => {
       this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
+      this.set('registerAs', this);
     });
   })
 
