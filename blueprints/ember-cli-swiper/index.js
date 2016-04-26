@@ -5,7 +5,7 @@ module.exports = {
   },
 
   afterInstall() {
-    return this.addBowerPackageToProject('swiper', '~3.1');
+    return this.addBowerPackageToProject('Swiper', '~3.1');
   }
 
 };
