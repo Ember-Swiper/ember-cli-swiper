@@ -18,6 +18,15 @@ export default Ember.Component.extend({
       options.loop = true;
     }
 
+    if (this.get('initialSlide')) {
+      options.initialSlide = this.get('initialSlide');
+    }
+
+    // disables swipping
+    if (this.get('followFinger')) {
+      options.followFinger = false;
+    }
+
     if (this.get('vertical')) {
       options.direction = 'vertical';
     }
