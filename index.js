@@ -6,8 +6,8 @@ module.exports = {
 
   included(app) {
     this._super.included(app);
-    app.import(app.bowerDirectory + '/Swiper/dist/css/swiper.css');
-    app.import(app.bowerDirectory + '/Swiper/dist/js/swiper.js');
+    app.import(app.bowerDirectory + '/swiper/dist/css/swiper.css');
+    app.import(app.bowerDirectory + '/swiper/dist/js/swiper.js');
   }
 
 };
