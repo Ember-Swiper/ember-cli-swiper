@@ -34,3 +34,13 @@ test('pagination node is present if requested', function(assert) {
   this.render(hbs`{{#swiper-container pagination=true}} Foo {{/swiper-container}}`);
   assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
 });
+
+test('navigation buttons are present if requested', function(assert) {
+  this.render(hbs`{{#swiper-container navigation=false}} Foo {{/swiper-container}}`);
+  assert.notOk(this.$('>:first-child').has('.swiper-button-next').length);
+  assert.notOk(this.$('>:first-child').has('.swiper-button-prev').length);
+
+  this.render(hbs`{{#swiper-container navigation=true}} Foo {{/swiper-container}}`);
+  assert.ok(this.$('>:first-child').has('.swiper-button-next').length);
+  assert.ok(this.$('>:first-child').has('.swiper-button-prev').length);
+});
