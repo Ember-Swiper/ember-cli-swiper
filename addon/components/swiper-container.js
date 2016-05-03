@@ -14,6 +14,11 @@ export default Ember.Component.extend({
       options.paginationClickable = true;
     }
 
+    if (this.get('navigation')) {
+      options.nextButton = '.swiper-button-next';
+      options.prevButton = '.swiper-button-prev';
+    }
+
     if (this.get('loop')) {
       options.loop = true;
     }
