@@ -7,7 +7,10 @@ module.exports = {
   included(app) {
     this._super.included(app);
     app.import(app.bowerDirectory + '/swiper/dist/css/swiper.css');
-    app.import(app.bowerDirectory + '/swiper/dist/js/swiper.js');
+
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      app.import(app.bowerDirectory + '/swiper/dist/js/swiper.js');
+    }
   }
 
 };
