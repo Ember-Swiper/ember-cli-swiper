@@ -2744,7 +2744,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("forceUpdate()");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode(" also comes with an otional bool parameter ");
+        var el2 = dom.createTextNode(" also comes with an optional boolean parameter ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("code");
         var el3 = dom.createTextNode("updateTranslate");
