@@ -59,6 +59,10 @@ export default Ember.Component.extend({
     if (this.get('grabCursor')) {
       options.grabCursor = true;
     }
+    
+    if (this.get('breakpoints')) {
+      options.breakpoints = this.get('breakpoints');
+    }
 
     options.onSlideChangeEnd = this.slideChanged.bind(this);
 
