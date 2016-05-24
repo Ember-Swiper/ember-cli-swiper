@@ -61,15 +61,15 @@ export default Ember.Component.extend({
     }
 
     if (this.get('autoplay')) {
-      options.grabCursor = this.get('autoplay');
+      options.autoplay = this.get('autoplay');
     }
 
     if (this.get('autoplayStopOnLast')) {
-      options.grabCursor = this.get('autoplayStopOnLast');
+      options.autoplayStopOnLast = this.get('autoplayStopOnLast');
     }
 
     if (this.get('autoplayDisableOnInteraction')) {
-      options.grabCursor = this.get('autoplayDisableOnInteraction');
+      options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
     }
 
     options.onSlideChangeEnd = this.slideChanged.bind(this);
