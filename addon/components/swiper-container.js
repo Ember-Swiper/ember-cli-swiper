@@ -15,8 +15,8 @@ export default Ember.Component.extend({
     }
 
     if (this.get('navigation')) {
-      options.nextButton = '.swiper-button-next';
-      options.prevButton = '.swiper-button-prev';
+      options.nextButton = `#${this.get('elementId')} .swiper-button-next`;
+      options.prevButton = `#${this.get('elementId')} .swiper-button-prev`;
     }
 
     if (this.get('loop')) {
@@ -59,9 +59,14 @@ export default Ember.Component.extend({
     if (this.get('grabCursor')) {
       options.grabCursor = true;
     }
-    
+
     if (this.get('breakpoints')) {
       options.breakpoints = this.get('breakpoints');
+    }
+
+    if (this.get('scrollbar')) {
+      options.scrollbar = `#${this.get('elementId')} .swiper-scrollbar`;
+      options.scrollbarHide = this.get('scrollbarHide');
     }
 
     options.onSlideChangeEnd = this.slideChanged.bind(this);

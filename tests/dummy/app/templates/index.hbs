@@ -106,6 +106,28 @@
   \{{/swiper-container}}
 </pre>
 
+<h3>Scrollbar</h3>
+
+<p>The parameter <code>scrollbarHide</code> is optional.</p>
+
+{{#swiper-container scrollbar=true scrollbarHide=false slidesPerView=4 spaceBetween=5}}
+  {{#swiper-slide}}Slide 1{{/swiper-slide}}
+  {{#swiper-slide}}Slide 2{{/swiper-slide}}
+  {{#swiper-slide}}Slide 3{{/swiper-slide}}
+  {{#swiper-slide}}Slide 4{{/swiper-slide}}
+  {{#swiper-slide}}Slide 5{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container scrollbar=true scrollbarHide=false slidesPerView=4 spaceBetween=5}}
+    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
+    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
+
 <h3>Change Listener</h3>
 
 <p>The configured action receives the HTML-Element of the selected slide.</p>
