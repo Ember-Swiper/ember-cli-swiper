@@ -104,11 +104,9 @@ export default Ember.Component.extend({
     });
   }),
 
-  initSwiper: Ember.on('init', function() {
-    Ember.run.later(this, () => {
-      this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
-      this.set('registerAs', this);
-    });
+  initSwiper: Ember.on('didInsertElement', function() {
+    this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
+    this.set('registerAs', this);
   })
 
 });
