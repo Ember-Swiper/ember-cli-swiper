@@ -64,6 +64,18 @@ export default Ember.Component.extend({
       options.breakpoints = this.get('breakpoints');
     }
 
+    if (this.get('autoplay')) {
+      options.autoplay = this.get('autoplay');
+    }
+
+    if (this.get('autoplayStopOnLast')) {
+      options.autoplayStopOnLast = this.get('autoplayStopOnLast');
+    }
+
+    if (this.get('autoplayDisableOnInteraction')) {
+      options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
+    }
+
     options.onSlideChangeEnd = this.slideChanged.bind(this);
 
     return options;
