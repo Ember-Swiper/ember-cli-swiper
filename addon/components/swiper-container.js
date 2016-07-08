@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/swiper-container';
+import canUseDOM from '../utils/can-use-dom';
 
 export default Ember.Component.extend({
   layout,
@@ -116,8 +117,11 @@ export default Ember.Component.extend({
     });
   }),
 
-  initSwiper: Ember.on('didInsertElement', function() {
-    Ember.run.next(this, function() {
+  initSwiper: Ember.on('init', function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      if (!canUseDOM) {
+        return;
+      }
       this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
       this.set('registerAs', this);
     });
