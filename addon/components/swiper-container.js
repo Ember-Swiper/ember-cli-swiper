@@ -27,13 +27,17 @@ export default Ember.Component.extend({
       options.initialSlide = this.get('initialSlide');
     }
 
-    // disables swipping
+    // Disables swiping
     if (this.get('followFinger')) {
       options.followFinger = false;
     }
 
     if (this.get('vertical')) {
       options.direction = 'vertical';
+    }
+
+    if (this.get('slidesPerGroup')) {
+      options.slidesPerGroup = this.get('slidesPerGroup');
     }
 
     if (this.get('slidesPerView')) {
@@ -59,7 +63,7 @@ export default Ember.Component.extend({
     if (this.get('grabCursor')) {
       options.grabCursor = true;
     }
-    
+
     if (this.get('breakpoints')) {
       options.breakpoints = this.get('breakpoints');
     }
