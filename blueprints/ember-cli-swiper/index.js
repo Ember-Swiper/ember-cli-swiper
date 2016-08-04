@@ -1,11 +1,11 @@
+/* jshint node:true */
+
 module.exports = {
-  description: 'add swiper bower package',
+  description: 'Add swiper bower package',
 
-  normalizeEntityName() {
-  },
+  normalizeEntityName: function() {},
 
-  afterInstall() {
-    return this.addBowerPackageToProject('swiper', '~3.3.1 ');
+  afterInstall: function() {
+    return this.addBowerPackageToProject('swiper', '~3.3.1');
   }
-
 };
