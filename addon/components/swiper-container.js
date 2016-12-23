@@ -14,6 +14,14 @@ export default Ember.Component.extend({
       options.paginationClickable = true;
     }
 
+    if (this.get('nextButton')) {
+      options.nextButton = this.get('nextButton');
+    }
+
+    if (this.get('prevButton')) {
+      options.prevButton = this.get('prevButton');
+    }
+
     if (this.get('navigation')) {
       options.nextButton = '.swiper-button-next';
       options.prevButton = '.swiper-button-prev';
@@ -31,7 +39,7 @@ export default Ember.Component.extend({
     if (this.get('followFinger')) {
       options.followFinger = false;
     }
-    
+
     // disable all user interactions
     if (this.get('onlyExternal')) {
       options.onlyExternal = true;
@@ -64,7 +72,7 @@ export default Ember.Component.extend({
     if (this.get('grabCursor')) {
       options.grabCursor = true;
     }
-    
+
     if (this.get('breakpoints')) {
       options.breakpoints = this.get('breakpoints');
     }
