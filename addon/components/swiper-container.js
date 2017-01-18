@@ -3,12 +3,14 @@
 import Ember from 'ember';
 import layout from '../templates/components/swiper-container';
 
-export default Ember.Component.extend({
+const { Component, computed, observer, on, run, $ } = Ember;
+
+export default Component.extend({
   layout,
   classNames: ['swiper-container'],
   swiper: false,
 
-  swiperOptions: Ember.computed('pagination', 'loop', 'vertical', 'onlyExternal', function() {
+  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', function() {
     let options = {};
 
     if (this.get('pagination')) {
@@ -96,8 +98,8 @@ export default Ember.Component.extend({
     return options;
   }),
 
-  updateTriggered: Ember.observer('updateFor', function() {
-    Ember.run.once(this, this.get('swiper').update);
+  updateTriggered: observer('updateFor', function() {
+    run.once(this, this.get('swiper').update);
   }),
 
   forceUpdate(updateTranslate) {
@@ -106,7 +108,7 @@ export default Ember.Component.extend({
   },
 
   slideChanged(swiper) {
-    let index = this.get('loop') ? Ember.$(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
+    let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
     this.set('currentSlideInternal', index);
     this.set('currentSlide', index);
 
@@ -115,14 +117,14 @@ export default Ember.Component.extend({
     }
   },
 
-  currentSlideModified: Ember.observer('currentSlide', function() {
-    Ember.run.later(this, () => {
+  currentSlideModified: observer('currentSlide', function() {
+    run.later(this, () => {
       if (this.get('currentSlide') !== this.get('currentSlideInternal')) {
         let index = this.get('currentSlide');
 
         if (this.get('loop')) {
           let swiper = this.get('swiper');
-          index = Ember.$(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
+          index = $(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
         }
 
         this.get('swiper').slideTo(index);
@@ -131,8 +133,8 @@ export default Ember.Component.extend({
     });
   }),
 
-  initSwiper: Ember.on('didInsertElement', function() {
-    Ember.run.scheduleOnce('afterRender', this, function() {
+  initSwiper: on('didInsertElement', function() {
+    run.scheduleOnce('afterRender', this, function() {
       this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
       this.set('registerAs', this);
     });

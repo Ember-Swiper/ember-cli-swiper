@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { Controller, $: jQ } = Ember;
+
+export default Controller.extend({
   selectionHistory: '',
 
   actions: {
 
     addToHistory(newElement) {
-      this.set('selectionHistory', `${Ember.$(newElement).text()}${this.get('selectionHistory')}`);
+      this.set('selectionHistory', `${jQ(newElement).text()}${this.get('selectionHistory')}`);
     },
 
     goToTwo() {

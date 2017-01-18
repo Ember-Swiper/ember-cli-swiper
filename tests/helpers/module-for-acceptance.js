@@ -11,6 +11,7 @@ export default function(name, options = {}) {
       this.application = startApp();
 
       if (options.beforeEach) {
+        // jscs:disable requireSpread
         return options.beforeEach.apply(this, arguments);
       }
     },
