@@ -1,3 +1,5 @@
+/* globals Swiper */
+
 import Ember from 'ember';
 import layout from '../templates/components/swiper-container';
 
