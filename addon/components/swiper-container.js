@@ -39,7 +39,7 @@ export default Component.extend({
       options.initialSlide = this.get('initialSlide');
     }
 
-    // disables swipping
+    // Disables swiping
     if (this.get('followFinger')) {
       options.followFinger = false;
     }
@@ -51,6 +51,10 @@ export default Component.extend({
 
     if (this.get('vertical')) {
       options.direction = 'vertical';
+    }
+
+    if (this.get('slidesPerGroup')) {
+      options.slidesPerGroup = this.get('slidesPerGroup');
     }
 
     if (this.get('slidesPerView')) {
