@@ -69,6 +69,10 @@ export default Component.extend({
       options.freeMode = true;
     }
 
+    if (this.get('speed')) {
+      options.speed = this.get('speed');
+    }
+
     if (this.get('freeModeSticky')) {
       options.freeModeSticky = true;
     }
