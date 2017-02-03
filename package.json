@@ -54,6 +54,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://suven.github.io/ember-cli-swiper/"
+    "demoURL": "http://suven.github.io/ember-cli-swiper/",
+    "before": "ember-cli-sri"
   }
 }
