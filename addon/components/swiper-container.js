@@ -10,7 +10,7 @@ export default Component.extend({
   classNames: ['swiper-container'],
   swiper: false,
 
-  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', function() {
+  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', 'effect', function() {
     let options = {};
 
     if (this.get('pagination')) {
@@ -99,6 +99,23 @@ export default Component.extend({
 
     if (this.get('autoplayDisableOnInteraction')) {
       options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
+    }
+
+    // basic support for 'effect' API
+    let effect = this.get('effect');
+    if (effect && effect !== 'slide') {
+      options.effect = this.get('effect');
+
+      // look for effect configurations if an effect other than the default
+      // 'slide' effect is given
+      let effectConfigs = this.getProperties('fade', 'cube', 'overflow', 'flip');
+
+      // add available effect configurations to options
+      Object.keys(effectConfigs).forEach((c) => {
+        if (effectConfigs[c]) {
+          options[c] = effectConfigs[c];
+        }
+      });
     }
 
     options.onSlideChangeEnd = this.slideChanged.bind(this);

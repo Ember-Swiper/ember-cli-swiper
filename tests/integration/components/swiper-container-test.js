@@ -44,3 +44,9 @@ test('navigation buttons are present if requested', function(assert) {
   assert.ok(this.$('>:first-child').has('.swiper-button-next').length);
   assert.ok(this.$('>:first-child').has('.swiper-button-prev').length);
 });
+
+test('it supports `effect` attribute', function(assert) {
+  this.render(hbs`{{#swiper-container effect='fade'}} Foo {{/swiper-container}}`);
+  assert.ok(this.$().has('.swiper-container-fade').length,
+    'Container has `fade` class');
+});
