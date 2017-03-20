@@ -14,7 +14,7 @@ export default Component.extend({
     let options = {};
 
     if (this.get('pagination')) {
-      options.pagination = `#${this.get('elementId')} .swiper-pagination`;
+      options.pagination = `#${this.get('elementId')} > .swiper-pagination`;
       options.paginationClickable = true;
     }
 
