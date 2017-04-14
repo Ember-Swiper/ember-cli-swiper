@@ -52,17 +52,17 @@ test('it supports `effect` attribute', function(assert) {
     'Container has `fade` class');
 });
 
-test('on initialization, calls `onInit` with the swiper container component if `onInit` is passed in', function(assert) {
-  this.set('actions.onInit', () => {});
-  let spy = sinon.spy(this.get('actions'), 'onInit');
-  this.render(hbs`{{#swiper-container onInit="onInit" registerAs=superDuperSwiper}} Foo {{/swiper-container}}`);
+test('on initialization, calls `afterSwiperInit` with the swiper container component if `afterSwiperInit` is passed in', function(assert) {
+  this.set('actions.afterSwiperInit', () => {});
+  let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
+  this.render(hbs`{{#swiper-container afterSwiperInit="afterSwiperInit" registerAs=superDuperSwiper}} Foo {{/swiper-container}}`);
   assert.equal(spy.callCount, 1);
   assert.equal(spy.getCall(0).args[0], this.get('superDuperSwiper'));
 });
 
-test('on initialization, does not call `onInit` if `onInit` is not passed in', function(assert) {
-  this.set('actions.onInit', () => {});
-  let spy = sinon.spy(this.get('actions'), 'onInit');
+test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is not passed in', function(assert) {
+  this.set('actions.afterSwiperInit', () => {});
+  let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
   this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
   assert.equal(spy.callCount, 0);
 });

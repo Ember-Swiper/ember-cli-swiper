@@ -162,8 +162,8 @@ export default Component.extend({
     run.scheduleOnce('afterRender', this, function() {
       this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
       this.set('registerAs', this);
-      if (this.get('onInit')) {
-        this.sendAction('onInit', this);
+      if (this.get('afterSwiperInit')) {
+        this.sendAction('afterSwiperInit', this);
       }
     });
   })
