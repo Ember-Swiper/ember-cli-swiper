@@ -89,6 +89,10 @@ export default Component.extend({
       options.breakpoints = this.get('breakpoints');
     }
 
+    if (this.get('keyboardControl')) {
+      options.keyboardControl = this.get('keyboardControl');
+    }
+
     if (this.get('autoplay')) {
       options.autoplay = this.get('autoplay');
     }
