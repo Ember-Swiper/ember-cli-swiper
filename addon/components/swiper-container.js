@@ -5,13 +5,28 @@ import layout from '../templates/components/swiper-container';
 
 const { Component, computed, observer, on, run, $ } = Ember;
 
+const swiperParameters = [
+  // Keyboard / Mousewheel
+  'keyboardControl',
+  'mousewheelControl',
+  'mousewheelForceToAxis',
+  'mousewheelInvert',
+  'mousewheelReleaseOnEdges'
+];
+
 export default Component.extend({
   layout,
   classNames: ['swiper-container'],
   swiper: false,
 
-  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', 'effect', function() {
+  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', 'effect', ...swiperParameters, function() {
     let options = {};
+
+    swiperParameters.forEach((parameter) => {
+      if (this.get(parameter)) {
+        options[parameter] = parameter;
+      }
+    });
 
     if (this.get('pagination')) {
       options.pagination = `#${this.get('elementId')} > .swiper-pagination`;
