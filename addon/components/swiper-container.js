@@ -76,6 +76,10 @@ export default Component.extend({
       options.slidesPerView = this.get('slidesPerView');
     }
 
+    if (this.get('slidesPerColumn')) {
+      options.slidesPerColumn = this.get('slidesPerColumn');
+    }
+
     if (this.get('spaceBetween')) {
       options.spaceBetween = this.get('spaceBetween');
     }
