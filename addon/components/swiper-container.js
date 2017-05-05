@@ -104,6 +104,10 @@ export default Component.extend({
       options.grabCursor = true;
     }
 
+    if (this.get('nested')) {
+      options.nested = true;
+    }
+
     if (this.get('breakpoints')) {
       options.breakpoints = this.get('breakpoints');
     }
