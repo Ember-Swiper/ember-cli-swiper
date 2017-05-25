@@ -105,8 +105,11 @@ export default Component.extend({
       options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
     }
 
-    if (this.get('watchSlidesVisibility')) {
+    if (this.get('watchSlidesProgress')) {
       options.watchSlidesProgress = true;
+    }
+
+    if (this.get('watchSlidesVisibility')) {
       options.watchSlidesVisibility = true;
     }
 
