@@ -112,6 +112,10 @@ export default Component.extend({
       options.breakpoints = this.get('breakpoints');
     }
 
+    if (this.get('keyboardControl')) {
+      options.keyboardControl = this.get('keyboardControl');
+    }
+
     if (this.get('autoplay')) {
       options.autoplay = this.get('autoplay');
     }
@@ -122,6 +126,14 @@ export default Component.extend({
 
     if (this.get('autoplayDisableOnInteraction')) {
       options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
+    }
+
+    if (this.get('watchSlidesProgress')) {
+      options.watchSlidesProgress = true;
+    }
+
+    if (this.get('watchSlidesVisibility')) {
+      options.watchSlidesVisibility = true;
     }
 
     // basic support for 'effect' API
