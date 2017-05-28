@@ -50,8 +50,9 @@
     "carousel"
   ],
   "dependencies": {
+    "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "1.1.1",
-    "ember-cli-babel": "^5.1.7"
+    "swiper": "^3.4.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
