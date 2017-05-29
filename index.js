@@ -10,13 +10,17 @@ module.exports = {
 
   treeForVendor: function(defaultTree) {
     var swiperPath = path.join(path.dirname(require.resolve('swiper')), '..');
-
     var browserVendorLib = new Funnel(swiperPath, {
       destDir: 'swiper',
       include: ['js/swiper.min.js', 'css/swiper.min.css']
     });
 
-    browserVendorLib = map(browserVendorLib, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+    browserVendorLib = map(browserVendorLib, (content, relativePath) => {
+      if (relativePath.indexOf('css') !== -1) {
+        return content;
+      }
+      return `if (typeof FastBoot === 'undefined') { ${content} }`
+    });
   
     return new mergeTrees([defaultTree, browserVendorLib]);
   },
