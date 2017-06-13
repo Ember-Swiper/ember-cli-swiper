@@ -29,7 +29,8 @@ export default Component.extend({
     });
 
     if (this.get('pagination')) {
-      options.pagination = `#${this.get('elementId')} > .swiper-pagination`;
+      options.pagination = typeof this.get('pagination') === 'boolean' ?
+        `#${this.get('elementId')} > .swiper-pagination` : this.get('pagination');
       options.paginationClickable = true;
     }
 
