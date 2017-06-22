@@ -59,6 +59,10 @@ export default Component.extend({
       options.followFinger = false;
     }
 
+    if (typeof this.get('simulateTouch') === 'boolean') {
+      options.simulateTouch = this.get('simulateTouch');
+    }
+
     // disable all user interactions
     if (this.get('onlyExternal')) {
       options.onlyExternal = true;
