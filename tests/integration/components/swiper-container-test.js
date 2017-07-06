@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
+import run from 'ember-runloop';
 
 moduleForComponent('swiper-container', 'Integration | Component | swiper container', {
   integration: true
@@ -65,4 +66,24 @@ test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is
   let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
   this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
   assert.equal(spy.callCount, 0);
+});
+
+test('it destroies the Swiper instance when the component element destroied', function(assert) {
+  assert.expect(2);
+  this.set('componentInstance', null);
+  this.set('active', true);
+
+  this.render(hbs`{{#if active}}{{swiper-container registerAs=componentInstance}}{{/if}}`);
+
+  run(() => {
+    let componentInstance = this.get('componentInstance');
+    assert.ok(componentInstance.swiper, 'Swiper intantiated');
+
+    sinon.stub(componentInstance.swiper, 'destroy').callsFake(() => {
+      assert.ok(true, 'destroy was called');
+      componentInstance.swiper.destroy.callThrough();
+    });
+
+    this.set('active', false);
+  });
 });
