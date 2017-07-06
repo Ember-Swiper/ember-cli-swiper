@@ -1,5 +1,5 @@
 <div class="swiper-wrapper">
-  {{yield}}
+  {{yield (hash slide=(component "swiper-slide"))}}
 </div>
 
 {{#if pagination}}

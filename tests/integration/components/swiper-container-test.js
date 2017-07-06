@@ -66,3 +66,8 @@ test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is
   this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
   assert.equal(spy.callCount, 0);
 });
+
+test('it yields a slide compontent', function(assert) {
+  this.render(hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`);
+  assert.equal(this.$('.swiper-slide').length, 1, 'renders a single slide');
+});
