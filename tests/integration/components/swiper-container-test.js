@@ -34,6 +34,9 @@ test('pagination node is present if requested', function(assert) {
 
   this.render(hbs`{{#swiper-container pagination=true}} Foo {{/swiper-container}}`);
   assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
+
+  this.render(hbs`{{#swiper-container pagination=".custom-pagination"}} Foo <div class="custom-pagination"></div>{{/swiper-container}}`);
+  assert.ok(this.$('.custom-pagination').hasClass('swiper-pagination-clickable'));
 });
 
 test('navigation buttons are present if requested', function(assert) {
