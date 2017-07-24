@@ -258,3 +258,17 @@ Current Slideindex: {{currentSlide2}}
     this.get('superDuperSwiper').forceUpdate();
   }
 </pre>
+
+<h3>Contextual Slides</h3>
+
+{{#swiper-container as |container|}}
+  {{#container.slide}}Slide 1{{/container.slide}}
+  {{#container.slide}}Slide 2{{/container.slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container as |container|}}
+    \{{#container.slide}}Slide 1\{{/container.slide}}
+    \{{#container.slide}}Slide 2\{{/container.slide}}
+  \{{/swiper-container}}
+</pre>
