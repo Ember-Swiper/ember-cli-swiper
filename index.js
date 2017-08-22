@@ -9,6 +9,7 @@ module.exports = {
   name: 'ember-cli-swiper',
 
   treeForVendor: function(defaultTree) {
+    var trees = [];
     var swiperPath = path.join(path.dirname(require.resolve('swiper')), '..');
     var browserVendorLib = new Funnel(swiperPath, {
       destDir: 'swiper',
@@ -21,8 +22,14 @@ module.exports = {
       }
       return `if (typeof FastBoot === 'undefined') { ${content} }`
     });
-  
-    return new mergeTrees([defaultTree, browserVendorLib]);
+
+    if (defaultTree !== undefined) {
+      trees.push(defaultTree);
+    }
+
+    trees.push(browserVendorLib);
+
+    return new mergeTrees(trees);
   },
 
   included: function(app) {
