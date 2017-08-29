@@ -56,7 +56,7 @@ export default Component.extend({
     }
 
     // Disables swiping
-    if (this.get('followFinger')) {
+    if (this.get('followFinger') === false) {
       options.followFinger = false;
     }
 
