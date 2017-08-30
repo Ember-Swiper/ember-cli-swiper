@@ -68,7 +68,7 @@ test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is
   assert.equal(spy.callCount, 0);
 });
 
-test('it destroies the Swiper instance when the component element destroied', function(assert) {
+test('it destroys the Swiper instance when the component element destroyed', function(assert) {
   assert.expect(2);
   this.set('componentInstance', null);
   this.set('active', true);
