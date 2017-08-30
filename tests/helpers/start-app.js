@@ -3,8 +3,6 @@ import Application from '../../app';
 import config from '../../config/environment';
 
 export default function startApp(attrs) {
-  let application;
-
   // jscs:disable disallowDirectPropertyAccess
   let attributes = Ember.merge({}, config.APP);
 
@@ -12,11 +10,10 @@ export default function startApp(attrs) {
   attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
 
   // jscs:disable disallowDirectPropertyAccess
-  Ember.run(() => {
-    application = Application.create(attributes);
+  return Ember.run(() => {
+    let application = Application.create(attributes);
     application.setupForTesting();
     application.injectTestHelpers();
+    return application;
   });
-
-  return application;
 }
