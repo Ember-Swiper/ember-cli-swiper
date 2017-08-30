@@ -35,6 +35,9 @@ test('pagination node is present if requested', function(assert) {
 
   this.render(hbs`{{#swiper-container pagination=true}} Foo {{/swiper-container}}`);
   assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
+
+  this.render(hbs`{{#swiper-container pagination=".custom-pagination"}} Foo <div class="custom-pagination"></div>{{/swiper-container}}`);
+  assert.ok(this.$('.custom-pagination').hasClass('swiper-pagination-clickable'));
 });
 
 test('navigation buttons are present if requested', function(assert) {
@@ -86,4 +89,9 @@ test('it destroys the Swiper instance when the component element destroyed', fun
 
     this.set('active', false);
   });
+});
+
+test('it yields a slide component', function(assert) {
+  this.render(hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`);
+  assert.equal(this.$('.swiper-slide').length, 1, 'renders a single slide');
 });
