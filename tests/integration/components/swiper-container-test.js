@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
-import run from 'ember-runloop';
+import { run } from '@ember/runloop';
 
 moduleForComponent('swiper-container', 'Integration | Component | swiper container', {
   integration: true

@@ -1,11 +1,10 @@
 /* globals Swiper */
 
 import $ from 'jquery';
-import Component from 'ember-component';
-import computed from 'ember-computed';
-import observer from 'ember-metal/observer';
-import on from 'ember-evented/on';
-import run from 'ember-runloop';
+import Component from '@ember/component';
+import { computed, observer } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { run } from '@ember/runloop';
 import layout from '../templates/components/swiper-container';
 
 const swiperParameters = [

@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { Controller, $: jQ } = Ember;
+import Controller from '@ember/controller';
+import jQ from 'jquery';
 
 export default Controller.extend({
   selectionHistory: '',
