@@ -3,13 +3,8 @@ import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
-let App;
-
-Ember.MODEL_FACTORY_INJECTIONS = true;
-
-const { Application } = Ember;
-
-App = Application.extend({
+// jscs:disable disallowDirectPropertyAccess
+const App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver

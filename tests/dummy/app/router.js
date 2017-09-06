@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import config from './config/environment';
 
-const { Router: ERouter } = Ember;
-
-const Router = ERouter.extend({
+// jscs:disable disallowDirectPropertyAccess
+const Router = Ember.Router.extend({
   location: config.locationType,
   rootURL: config.rootURL
 });
