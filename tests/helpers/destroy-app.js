@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 export default function destroyApp(application) {
   // jscs:disable disallowDirectPropertyAccess
-  Ember.run(application, 'destroy');
+  run(application, 'destroy');
 }

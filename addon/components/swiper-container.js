@@ -1,9 +1,11 @@
 /* globals Swiper */
 
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
+import { computed, observer } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { run } from '@ember/runloop';
 import layout from '../templates/components/swiper-container';
-
-const { Component, computed, observer, on, run, $ } = Ember;
 
 const swiperParameters = [
   // Keyboard / Mousewheel
@@ -200,11 +202,20 @@ export default Component.extend({
 
   initSwiper: on('didInsertElement', function() {
     run.scheduleOnce('afterRender', this, function() {
-      this.set('swiper', new Swiper(`#${this.get('elementId')}`, this.get('swiperOptions')));
+      this.set('swiper', new Swiper(this.element, this.get('swiperOptions')));
       this.set('registerAs', this);
       if (this.get('afterSwiperInit')) {
         this.sendAction('afterSwiperInit', this);
       }
     });
-  })
+  }),
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    if (this.get('swiper')) {
+      this.get('swiper').destroy();
+      this.set('swiper', null);
+    }
+  }
 });

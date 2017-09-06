@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* eslint-env node */
 'use strict';
 var map = require('broccoli-stew').map;
 var path = require('path');
