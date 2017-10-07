@@ -5,6 +5,7 @@ import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { on } from '@ember/object/evented';
 import { run } from '@ember/runloop';
+import { warn } from '@ember/debug';
 import layout from '../templates/components/swiper-container';
 
 const swiperParameters = [
@@ -38,10 +39,20 @@ export default Component.extend({
 
     if (this.get('nextButton')) {
       options.nextButton = this.get('nextButton');
+      warn(
+        'ember-cli-swiper option `nextButton` is ignored while `navigation` active',
+        !this.get('navigation'),
+        { id: 'ember-cli-swiper.next-button-with-navigation' }
+      );
     }
 
     if (this.get('prevButton')) {
       options.prevButton = this.get('prevButton');
+      warn(
+        'ember-cli-swiper option `prevButton` is ignored while `navigation` active',
+        !this.get('navigation'),
+        { id: 'ember-cli-swiper.prev-button-with-navigation' }
+      );
     }
 
     if (this.get('navigation')) {
