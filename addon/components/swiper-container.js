@@ -2,192 +2,138 @@
 
 import $ from 'jquery';
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
-import { on } from '@ember/object/evented';
+import { getProperties, computed, observer } from '@ember/object';
 import { run } from '@ember/runloop';
 import { warn } from '@ember/debug';
+import { assign as emAssign } from '@ember/polyfills';
+
 import layout from '../templates/components/swiper-container';
 
-const swiperParameters = [
-  // Keyboard / Mousewheel
-  'keyboardControl',
-  'mousewheelControl',
-  'mousewheelForceToAxis',
-  'mousewheelInvert',
-  'mousewheelReleaseOnEdges'
+const assign = (Object.assign || emAssign);
+const { keys } = Object;
+
+const EMBER_CLI_SWIPER_OPTIONS = [
+  'options',
+  'navigation',
+  'registerAs',
+  'vertical',
+  'centered',
+  'updateFor',
+  'afterSwiperInit',
+  'currentSlide'
 ];
 
 export default Component.extend({
   layout,
   classNames: ['swiper-container'],
-  swiper: false,
 
-  swiperOptions: computed('pagination', 'loop', 'vertical', 'onlyExternal', 'effect', ...swiperParameters, function() {
-    let options = {};
+  /**
+   * Swiper Instance
+   * @private
+   * @type {Boolean}
+   */
+  _swiper: false,
 
-    swiperParameters.forEach((parameter) => {
-      if (this.get(parameter)) {
-        options[parameter] = parameter;
-      }
-    });
+  /**
+   * Proxies `Swiper.activeIndex`
+   * @public
+   * @type {Number}
+   */
+  currentSlide: 0,
 
-    if (this.get('pagination')) {
-      options.pagination = typeof this.get('pagination') === 'boolean' ?
-        `#${this.get('elementId')} > .swiper-pagination` : this.get('pagination');
-      options.paginationClickable = true;
+  /**
+   * Compared against `currentSlide`
+   * @private
+   * @type {Number}
+   */
+  _currentSlideInternal: 0,
+
+  /**
+   * Single Attribute options
+   * @public
+   * @type {Object}
+   */
+  options: computed(() => ({})),
+
+  /**
+   * Get Swiper options from attributes
+   * @private
+   * @return {Object}
+   */
+  _getOptions() {
+    let attrs = getProperties(this, ...keys(this.attrs));
+    let options = assign({}, this.get('options'), attrs);
+
+    /*
+     Automatically configure pagination set to `true`
+     */
+    if (options.pagination === true) {
+      options.pagination = `#${this.get('elementId')} > .swiper-pagination`;
     }
 
-    if (this.get('nextButton')) {
-      options.nextButton = this.get('nextButton');
+    if (options.pagination) {
+      options.paginationClickable = true; // paginated must be clickable
+    }
+
+    if (options.navigation) {
       warn(
-        'ember-cli-swiper option `nextButton` is ignored while `navigation` active',
-        !this.get('navigation'),
+        'ember-cli-swiper option `nextButton` is ignored while `navigation` true',
+        !options.nextButton,
         { id: 'ember-cli-swiper.next-button-with-navigation' }
       );
-    }
 
-    if (this.get('prevButton')) {
-      options.prevButton = this.get('prevButton');
       warn(
-        'ember-cli-swiper option `prevButton` is ignored while `navigation` active',
-        !this.get('navigation'),
+        'ember-cli-swiper option `prevButton` is ignored while `navigation` true',
+        !options.prevButton,
         { id: 'ember-cli-swiper.prev-button-with-navigation' }
       );
-    }
 
-    if (this.get('navigation')) {
       options.nextButton = '.swiper-button-next';
       options.prevButton = '.swiper-button-prev';
     }
 
-    if (this.get('loop')) {
-      options.loop = true;
-    }
+    if (options.vertical) {
+      warn(
+        'ember-cli-swiper option `direction` is ignored while `vertical` true',
+        !options.direction,
+        { id: 'ember-cli-swiper.direction-with-virtical' }
+      );
 
-    if (this.get('initialSlide')) {
-      options.initialSlide = this.get('initialSlide');
-    }
-
-    // Disables swiping
-    if (this.get('followFinger') === false) {
-      options.followFinger = false;
-    }
-
-    if (typeof this.get('simulateTouch') === 'boolean') {
-      options.simulateTouch = this.get('simulateTouch');
-    }
-
-    // disable all user interactions
-    if (this.get('onlyExternal')) {
-      options.onlyExternal = true;
-    }
-
-    if (this.get('vertical')) {
       options.direction = 'vertical';
     }
 
-    if (this.get('slidesPerGroup')) {
-      options.slidesPerGroup = this.get('slidesPerGroup');
-    }
+    if (options.centered) {
+      warn(
+        'ember-cli-swiper option `centeredSlides` is ignored while `centered` true',
+        !options.centeredSlides,
+        { id: 'ember-cli-swiper.centered-with-centered-slides' }
+      );
 
-    if (this.get('slidesPerView')) {
-      options.slidesPerView = this.get('slidesPerView');
-    }
-
-    if (this.get('slidesPerColumn')) {
-      options.slidesPerColumn = this.get('slidesPerColumn');
-    }
-
-    if (this.get('spaceBetween')) {
-      options.spaceBetween = this.get('spaceBetween');
-    }
-
-    if (this.get('centered')) {
       options.centeredSlides = true;
     }
 
-    if (this.get('freeMode')) {
-      options.freeMode = true;
-    }
-
-    if (this.get('speed')) {
-      options.speed = this.get('speed');
-    }
-
-    if (this.get('freeModeSticky')) {
-      options.freeModeSticky = true;
-    }
-
-    if (this.get('grabCursor')) {
-      options.grabCursor = true;
-    }
-
-    if (this.get('nested')) {
-      options.nested = true;
-    }
-
-    if (this.get('breakpoints')) {
-      options.breakpoints = this.get('breakpoints');
-    }
-
-    if (this.get('keyboardControl')) {
-      options.keyboardControl = this.get('keyboardControl');
-    }
-
-    if (this.get('autoplay')) {
-      options.autoplay = this.get('autoplay');
-    }
-
-    if (this.get('autoplayStopOnLast')) {
-      options.autoplayStopOnLast = this.get('autoplayStopOnLast');
-    }
-
-    if (this.get('autoplayDisableOnInteraction')) {
-      options.autoplayDisableOnInteraction = this.get('autoplayDisableOnInteraction');
-    }
-
-    if (this.get('watchSlidesProgress')) {
-      options.watchSlidesProgress = true;
-    }
-
-    if (this.get('watchSlidesVisibility')) {
-      options.watchSlidesVisibility = true;
-    }
-
-    // basic support for 'effect' API
-    let effect = this.get('effect');
-    if (effect && effect !== 'slide') {
-      options.effect = this.get('effect');
-
-      // look for effect configurations if an effect other than the default
-      // 'slide' effect is given
-      let effectConfigs = this.getProperties('fade', 'cube', 'overflow', 'flip');
-
-      // add available effect configurations to options
-      Object.keys(effectConfigs).forEach((c) => {
-        if (effectConfigs[c]) {
-          options[c] = effectConfigs[c];
-        }
-      });
-    }
-
-    options.onSlideChangeEnd = this.slideChanged.bind(this);
+    /*
+     Remove component-only
+     configuration options from Swiper options
+     */
+    keys(options).forEach((k) =>
+      EMBER_CLI_SWIPER_OPTIONS.includes(k) && delete options[k]);
 
     return options;
-  }),
+  },
 
   updateTriggered: observer('updateFor', function() {
-    run.once(this, this.get('swiper').update);
+    run.once(this, this.get('_swiper').update);
   }),
 
   forceUpdate(updateTranslate) {
-    this.get('swiper').update(updateTranslate === undefined ? false : updateTranslate);
-    this.get('swiper').slideTo(this.get('currentSlide'));
+    this.get('_swiper').update(updateTranslate === undefined ? false : updateTranslate);
+    this.get('_swiper').slideTo(this.get('currentSlide'));
   },
 
   slideChanged(swiper) {
     let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
-    this.set('currentSlideInternal', index);
+    this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
 
     if (this.get('onChange')) {
@@ -197,36 +143,38 @@ export default Component.extend({
 
   currentSlideModified: observer('currentSlide', function() {
     run.later(this, () => {
-      if (this.get('currentSlide') !== this.get('currentSlideInternal')) {
+      if (this.get('currentSlide') !== this.get('_currentSlideInternal')) {
         let index = this.get('currentSlide');
 
         if (this.get('loop')) {
-          let swiper = this.get('swiper');
+          let swiper = this.get('_swiper');
           index = $(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
         }
 
-        this.get('swiper').slideTo(index);
-        this.set('currentSlideInternal', this.get('currentSlide'));
+        this.get('_swiper').slideTo(index);
+        this.set('_currentSlideInternal', this.get('currentSlide'));
       }
     });
   }),
 
-  initSwiper: on('didInsertElement', function() {
-    run.scheduleOnce('afterRender', this, function() {
-      this.set('swiper', new Swiper(this.element, this.get('swiperOptions')));
-      this.set('registerAs', this);
-      if (this.get('afterSwiperInit')) {
-        this.sendAction('afterSwiperInit', this);
-      }
-    });
-  }),
+  didInsertElement() {
+    this._super(...arguments);
+    this.set('registerAs', this);
+
+    this
+      .set('_swiper', new Swiper(this.element, this._getOptions()))
+      .on('onSlideChangeEnd', this.slideChanged.bind(this));
+
+    this.sendAction('afterSwiperInit', this);
+  },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    if (this.get('swiper')) {
-      this.get('swiper').destroy();
-      this.set('swiper', null);
+    if (this.get('_swiper')) {
+      this.get('_swiper').off('onSlideChangeEnd');
+      this.get('_swiper').destroy();
+      this.set('_swiper', null);
     }
   }
 });

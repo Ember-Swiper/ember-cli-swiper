@@ -19,6 +19,42 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
+test('it set `noSwiping` via attribute and `options`', function(assert) {
+  let expected = false;
+
+  this.set('noSwiping', expected);
+  this.render(hbs`{{swiper-container noSwiping=noSwiping registerAs=componentInstanceAttr}}`);
+
+  assert.strictEqual(
+    this.get('componentInstanceAttr._swiper.params.noSwiping'),
+    expected,
+    'Swiper instance `noSwiping` configured by `noSwiping` attribute'
+  );
+
+  this.set('options', { noSwiping: expected });
+  this.render(hbs`{{swiper-container options=options registerAs=componentInstanceOpts}}`);
+
+  assert.strictEqual(
+    this.get('componentInstanceOpts._swiper.params.noSwiping'),
+    expected,
+    'Swiper instance `noSwiping` configured by `options.noSwiping`'
+  );
+});
+
+test('it should allow attributes to overwrite `options`', function(assert) {
+  let expected = 'fade';
+
+  this.set('effect', expected);
+  this.set('options', { effect: 'cube' });
+  this.render(hbs`{{swiper-container effect=effect options=options registerAs=componentInstanceAttr}}`);
+
+  assert.strictEqual(
+    this.get('componentInstanceAttr._swiper.params.effect'),
+    expected,
+    'Swiper instance configured by attribute not `options`'
+  );
+});
+
 test('predefined classes are added', function(assert) {
   this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
   assert.ok(this.$('>:first-child').hasClass('swiper-container'));
@@ -64,14 +100,7 @@ test('on initialization, calls `afterSwiperInit` with the swiper container compo
   assert.equal(spy.getCall(0).args[0], this.get('superDuperSwiper'));
 });
 
-test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is not passed in', function(assert) {
-  this.set('actions.afterSwiperInit', () => {});
-  let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
-  this.render(hbs`{{swiper-container}}`);
-  assert.equal(spy.callCount, 0);
-});
-
-test('it destroys the Swiper instance when the component element destroyed', function(assert) {
+test('it destroys the Swiper instance when component element destroyed', function(assert) {
   assert.expect(2);
   this.set('componentInstance', null);
   this.set('active', true);
@@ -80,15 +109,23 @@ test('it destroys the Swiper instance when the component element destroyed', fun
 
   run(() => {
     let componentInstance = this.get('componentInstance');
-    assert.ok(componentInstance.swiper, 'Swiper intantiated');
+    assert.ok(componentInstance._swiper, 'Swiper intantiated');
 
-    sinon.stub(componentInstance.swiper, 'destroy').callsFake(() => {
-      assert.ok(true, 'destroy was called');
-      componentInstance.swiper.destroy.callThrough();
-    });
+    sinon.stub(componentInstance._swiper, 'destroy').callsFake(() =>
+      assert.ok(true, 'destroy was called')).callThrough();
 
     this.set('active', false);
   });
+});
+
+test('it removes all `onSlideChangeEnd` handlers when component element destroyed', function(assert) {
+  this.set('componentInstance', null);
+  this.render(hbs`{{swiper-container registerAs=componentInstance}}`);
+
+  let componentInstance = this.get('componentInstance');
+
+  sinon.stub(componentInstance._swiper, 'off').callsFake((evt) =>
+    assert.strictEqual(evt, 'onSlideChangeEnd')).callThrough();
 });
 
 test('it yields a slide component', function(assert) {
