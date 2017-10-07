@@ -25,33 +25,33 @@ test('predefined classes are added', function(assert) {
 });
 
 test('contains the wrapper', function(assert) {
-  this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container}}`);
   assert.ok(this.$('>:first-child').has('.swiper-wrapper').length);
 });
 
 test('pagination node is present if requested', function(assert) {
-  this.render(hbs`{{#swiper-container pagination=false}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container pagination=false}}`);
   assert.notOk(this.$('>:first-child').has('.swiper-pagination').length);
 
-  this.render(hbs`{{#swiper-container pagination=true}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container pagination=true}}`);
   assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
 
-  this.render(hbs`{{#swiper-container pagination=".custom-pagination"}} Foo <div class="custom-pagination"></div>{{/swiper-container}}`);
+  this.render(hbs`{{#swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>{{/swiper-container}}`);
   assert.ok(this.$('.custom-pagination').hasClass('swiper-pagination-clickable'));
 });
 
 test('navigation buttons are present if requested', function(assert) {
-  this.render(hbs`{{#swiper-container navigation=false}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container navigation=false}}`);
   assert.notOk(this.$('>:first-child').has('.swiper-button-next').length);
   assert.notOk(this.$('>:first-child').has('.swiper-button-prev').length);
 
-  this.render(hbs`{{#swiper-container navigation=true}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container navigation=true}}`);
   assert.ok(this.$('>:first-child').has('.swiper-button-next').length);
   assert.ok(this.$('>:first-child').has('.swiper-button-prev').length);
 });
 
 test('it supports `effect` attribute', function(assert) {
-  this.render(hbs`{{#swiper-container effect='fade'}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container effect="fade"}}`);
   assert.ok(this.$().has('.swiper-container-fade').length,
     'Container has `fade` class');
 });
@@ -59,7 +59,7 @@ test('it supports `effect` attribute', function(assert) {
 test('on initialization, calls `afterSwiperInit` with the swiper container component if `afterSwiperInit` is passed in', function(assert) {
   this.set('actions.afterSwiperInit', () => {});
   let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
-  this.render(hbs`{{#swiper-container afterSwiperInit="afterSwiperInit" registerAs=superDuperSwiper}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container afterSwiperInit="afterSwiperInit" registerAs=superDuperSwiper}}`);
   assert.equal(spy.callCount, 1);
   assert.equal(spy.getCall(0).args[0], this.get('superDuperSwiper'));
 });
@@ -67,7 +67,7 @@ test('on initialization, calls `afterSwiperInit` with the swiper container compo
 test('on initialization, does not call `afterSwiperInit` if `afterSwiperInit` is not passed in', function(assert) {
   this.set('actions.afterSwiperInit', () => {});
   let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
-  this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container}}`);
   assert.equal(spy.callCount, 0);
 });
 

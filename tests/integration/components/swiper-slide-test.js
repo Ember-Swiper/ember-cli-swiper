@@ -18,15 +18,15 @@ test('it renders', function(assert) {
 });
 
 test('predefined classes are added', function(assert) {
-  this.render(hbs`{{#swiper-slide}} Foo {{/swiper-slide}}`);
+  this.render(hbs`{{swiper-slide}}`);
   assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
 
-  this.render(hbs`{{#swiper-slide class='foo bar'}} Foo {{/swiper-slide}}`);
+  this.render(hbs`{{swiper-slide class='foo bar'}}`);
   assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
 });
 
 test('own classes are added', function(assert) {
-  this.render(hbs`{{#swiper-slide class='foo bar'}} Foo {{/swiper-slide}}`);
+  this.render(hbs`{{swiper-slide class='foo bar'}}`);
   assert.ok(this.$('>:first-child').hasClass('foo'));
   assert.ok(this.$('>:first-child').hasClass('bar'));
 });
