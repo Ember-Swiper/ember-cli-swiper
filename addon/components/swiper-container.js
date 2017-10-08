@@ -2,15 +2,15 @@
 
 import $ from 'jquery';
 import Component from '@ember/component';
-import { getProperties, computed, observer } from '@ember/object';
-import { run } from '@ember/runloop';
+import { getProperties, computed } from '@ember/object';
+import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
 
 import layout from '../templates/components/swiper-container';
 
-const assign = (Object.assign || emAssign);
 const { keys } = Object;
+const assign = (Object.assign || emAssign);
 
 const EMBER_CLI_SWIPER_OPTIONS = [
   'options',
@@ -47,6 +47,20 @@ export default Component.extend({
    * @type {Number}
    */
   _currentSlideInternal: 0,
+
+  /**
+   * Abstraction to invoke `Swiper.update`
+   * @public
+   * @type {String}
+   */
+  updateFor: '',
+
+  /**
+   * Compared against `updateFor`
+   * @private
+   * @type {String}
+   */
+  _updateForInternal: '',
 
   /**
    * Single Attribute options
@@ -122,10 +136,6 @@ export default Component.extend({
     return options;
   },
 
-  updateTriggered: observer('updateFor', function() {
-    run.once(this, this.get('_swiper').update);
-  }),
-
   forceUpdate(updateTranslate) {
     this.get('_swiper').update(updateTranslate === undefined ? false : updateTranslate);
     this.get('_swiper').slideTo(this.get('currentSlide'));
@@ -133,29 +143,38 @@ export default Component.extend({
 
   slideChanged(swiper) {
     let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
+
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
-
-    if (this.get('onChange')) {
-      this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
-    }
+    this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
   },
 
-  currentSlideModified: observer('currentSlide', function() {
-    run.later(this, () => {
-      if (this.get('currentSlide') !== this.get('_currentSlideInternal')) {
-        let index = this.get('currentSlide');
+  didUpdateAttrs() {
+    this._super(...arguments);
 
-        if (this.get('loop')) {
-          let swiper = this.get('_swiper');
-          index = $(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
-        }
+    /*
+     Data-down Swiper slide activation
+     */
+    if (this.get('currentSlide') !== this.get('_currentSlideInternal')) {
+      let index = this.get('currentSlide');
 
-        this.get('_swiper').slideTo(index);
-        this.set('_currentSlideInternal', this.get('currentSlide'));
+      if (this.get('loop')) {
+        let swiper = this.get('_swiper');
+        index = $(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
       }
-    });
-  }),
+
+      this.get('_swiper').slideTo(index);
+      this.set('_currentSlideInternal', this.get('currentSlide'));
+    }
+
+    /*
+     Trigger `update()` of swiper
+     */
+    if (this.get('updateFor') !== this.get('_updateForInternal')) {
+      once(this, this.get('_swiper').update);
+      this.set('_updateForInternal', this.get('updateFor'));
+    }
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -163,7 +182,8 @@ export default Component.extend({
 
     this
       .set('_swiper', new Swiper(this.element, this._getOptions()))
-      .on('onSlideChangeEnd', this.slideChanged.bind(this));
+      .on('onSlideChangeEnd', this.slideChanged.bind(this))
+      .slideTo(this.get('currentSlide'));
 
     this.sendAction('afterSwiperInit', this);
   },

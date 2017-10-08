@@ -56,7 +56,7 @@ test('it should allow attributes to overwrite `options`', function(assert) {
 });
 
 test('predefined classes are added', function(assert) {
-  this.render(hbs`{{#swiper-container}} Foo {{/swiper-container}}`);
+  this.render(hbs`{{swiper-container}}`);
   assert.ok(this.$('>:first-child').hasClass('swiper-container'));
 });
 
@@ -119,6 +119,7 @@ test('it destroys the Swiper instance when component element destroyed', functio
 });
 
 test('it removes all `onSlideChangeEnd` handlers when component element destroyed', function(assert) {
+  assert.expect(1);
   this.set('componentInstance', null);
   this.render(hbs`{{swiper-container registerAs=componentInstance}}`);
 
@@ -131,4 +132,49 @@ test('it removes all `onSlideChangeEnd` handlers when component element destroye
 test('it yields a slide component', function(assert) {
   this.render(hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`);
   assert.equal(this.$('.swiper-slide').length, 1, 'renders a single slide');
+});
+
+test('it activates the slide at index `currentSlide` on render', function(assert) {
+  this.render(hbs`
+    {{#swiper-container currentSlide=1}}
+      {{swiper-slide}}
+      {{swiper-slide}}
+    {{/swiper-container}}`);
+
+  assert.ok(
+    this.$('.swiper-slide').last().hasClass('swiper-slide-active'),
+    'set slide at index 1 to active'
+  );
+});
+
+test('it updates the active slide when `currentSlide` is updated', function(assert) {
+  this.set('currentSlide', 0);
+
+  this.render(hbs`
+    {{#swiper-container currentSlide=currentSlide}}
+      {{swiper-slide}}
+      {{swiper-slide}}
+    {{/swiper-container}}`);
+
+  this.set('currentSlide', 1);
+
+  assert.ok(
+    this.$('.swiper-slide').last().hasClass('swiper-slide-active'),
+    'set slide at index 1 to active'
+  );
+});
+
+test('it triggers `swiper.update()` when `updateFor` is updated', function(assert) {
+  assert.expect(1);
+
+  this.set('updateFor', '');
+  this.render(hbs`
+    {{swiper-container updateFor=updateFor registerAs=componentInstance}}`);
+
+  let componentInstance = this.get('componentInstance');
+
+  sinon.stub(componentInstance._swiper, 'update').callsFake(() =>
+    assert.ok(true, 'called swiper.update')).callThrough();
+
+  this.set('updateFor', 'updateTranslate');
 });
