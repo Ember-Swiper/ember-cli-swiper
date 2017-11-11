@@ -22,7 +22,28 @@ Make sure you are using a somewhat recent version of nodejs when installing. Eve
 {{/swiper-container}}
 ```
 
-For all supported options see the [demo](http://suven.github.io/ember-cli-swiper/).
+## Options
+
+All [available Swiper options](http://idangero.us/swiper/api) are supported and can be configured two ways:
+
+As top level attributes:
+```handlebars
+{{swiper-container freeMode=true}}
+```
+
+As a hash of options:
+```handlebars
+{{!--
+// In controller
+Controller.extend({
+  myOptions: { parallax: true }
+});
+--}}
+
+{{swiper-container options=myOptions}}
+```
+
+Please note that attribute values will overwrite any conflicting options.
 
 ## Running tests
 
