@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Suven/ember-cli-swiper"
+    "url": "https://github.com/Ember-Swiper/ember-cli-swiper"
   },
   "dependencies": {
     "ember-cli-babel": "^6.3.0",
