@@ -74,6 +74,10 @@ test('pagination node is present if requested', function(assert) {
 
   this.render(hbs`{{#swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>{{/swiper-container}}`);
   assert.ok(this.$('.custom-pagination').hasClass('swiper-pagination-clickable'));
+
+  this.set('opts', { pagination: true });
+  this.render(hbs`{{swiper-container options=opts}}`);
+  assert.ok(this.$('>:first-child').has('.swiper-pagination').length);
 });
 
 test('navigation buttons are present if requested', function(assert) {
@@ -82,6 +86,11 @@ test('navigation buttons are present if requested', function(assert) {
   assert.notOk(this.$('>:first-child').has('.swiper-button-prev').length);
 
   this.render(hbs`{{swiper-container navigation=true}}`);
+  assert.ok(this.$('>:first-child').has('.swiper-button-next').length);
+  assert.ok(this.$('>:first-child').has('.swiper-button-prev').length);
+
+  this.set('opts', { navigation: true });
+  this.render(hbs`{{swiper-container options=opts}}`);
   assert.ok(this.$('>:first-child').has('.swiper-button-next').length);
   assert.ok(this.$('>:first-child').has('.swiper-button-prev').length);
 });

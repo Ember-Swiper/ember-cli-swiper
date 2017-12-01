@@ -1,8 +1,8 @@
-# Ember-cli-swiper [![Build Status](https://travis-ci.org/Suven/ember-cli-swiper.svg?branch=master)](https://travis-ci.org/Suven/ember-cli-swiper) [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-swiper.svg)](https://emberobserver.com/addons/ember-cli-swiper) [![Code Climate](https://codeclimate.com/github/Suven/ember-cli-swiper/badges/gpa.svg)](https://codeclimate.com/github/Suven/ember-cli-swiper)
+# Ember-cli-swiper [![Build Status](https://travis-ci.org/ember-swiper/ember-cli-swiper.svg?branch=master)](https://travis-ci.org/ember-swiper/ember-cli-swiper) [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-swiper.svg)](https://emberobserver.com/addons/ember-cli-swiper) [![Code Climate](https://codeclimate.com/github/ember-swiper/ember-cli-swiper/badges/gpa.svg)](https://codeclimate.com/github/ember-swiper/ember-cli-swiper)
 
 Simple ember-wrapper around [Swiper by idangerous](http://idangero.us/swiper/demos/).
 
-See the [demo](http://suven.github.io/ember-cli-swiper/) for examples and usage-infos.
+See the [demo](http://ember-swiper.github.io/ember-cli-swiper/) for examples and usage-infos.
 
 ## Installation
 

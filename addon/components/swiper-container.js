@@ -6,6 +6,7 @@ import { getProperties, computed } from '@ember/object';
 import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
+import { or } from '@ember/object/computed';
 
 import layout from '../templates/components/swiper-container';
 
@@ -61,6 +62,20 @@ export default Component.extend({
    * @type {String}
    */
   _updateForInternal: '',
+
+  /**
+   * Render navigation controls
+   * @public
+   * @type {Boolean}
+   */
+  hasNavigation: or('options.navigation', 'navigation'),
+
+  /**
+   * Render pagination controls
+   * @public
+   * @type {Boolean}
+   */
+  hasPagination: or('options.pagination', 'pagination'),
 
   /**
    * Single Attribute options
