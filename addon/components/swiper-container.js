@@ -146,7 +146,7 @@ export default Component.extend({
      configuration options from Swiper options
      */
     keys(options).forEach((k) =>
-      EMBER_CLI_SWIPER_OPTIONS.includes(k) && delete options[k]);
+      EMBER_CLI_SWIPER_OPTIONS.indexOf(k) !== -1 && delete options[k]);
 
     return options;
   },
