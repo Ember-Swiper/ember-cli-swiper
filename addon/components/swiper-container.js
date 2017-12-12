@@ -141,6 +141,12 @@ export default Component.extend({
       options.centeredSlides = true;
     }
 
+    if (options.autoplay && options.currentSlide) {
+      warn(
+        '`autoplay` and `currentSlide` are currently not compatible options'
+      );
+    }
+
     /*
      Remove component-only
      configuration options from Swiper options
@@ -195,10 +201,12 @@ export default Component.extend({
     this._super(...arguments);
     this.set('registerAs', this);
 
-    this
-      .set('_swiper', new Swiper(this.element, this._getOptions()))
-      .on('onSlideChangeEnd', this.slideChanged.bind(this))
-      .slideTo(this.get('currentSlide'));
+    this.set('_swiper', new Swiper(this.element, this._getOptions()))
+      .on('onSlideChangeEnd', this.slideChanged.bind(this));
+
+    if (this.get('currentSlide')) {
+      this.get('_swiper').slideTo(this.get('currentSlide'));
+    }
 
     this.sendAction('afterSwiperInit', this);
   },
