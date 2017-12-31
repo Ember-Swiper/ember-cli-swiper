@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import Component from '@ember/component';
 import { getProperties, computed } from '@ember/object';
-import { once } from '@ember/runloop';
+import { once, scheduleOnce } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
 import { or } from '@ember/object/computed';
@@ -193,14 +193,15 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.set('registerAs', this);
+    scheduleOnce('afterRender', this, () => {
+      this.set('registerAs', this);
+      this
+        .set('_swiper', new Swiper(this.element, this._getOptions()))
+        .on('onSlideChangeEnd', this.slideChanged.bind(this))
+        .slideTo(this.get('currentSlide'));
 
-    this
-      .set('_swiper', new Swiper(this.element, this._getOptions()))
-      .on('onSlideChangeEnd', this.slideChanged.bind(this))
-      .slideTo(this.get('currentSlide'));
-
-    this.sendAction('afterSwiperInit', this);
+      this.sendAction('afterSwiperInit', this);
+    });
   },
 
   willDestroyElement() {
