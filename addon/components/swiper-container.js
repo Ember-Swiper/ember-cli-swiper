@@ -198,7 +198,10 @@ export default Component.extend({
     this
       .set('_swiper', new Swiper(this.element, this._getOptions()))
       .on('onSlideChangeEnd', this.slideChanged.bind(this))
-      .slideTo(this.get('currentSlide'));
+
+    // ember-cli-swiper `autoplay` option is currently broken. There is an unmerged PR for a fix.
+    // In the meantime, this will let us use the option.
+    // .slideTo(this.get('currentSlide'));
 
     this.sendAction('afterSwiperInit', this);
   },
