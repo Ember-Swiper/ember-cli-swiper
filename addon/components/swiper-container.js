@@ -195,10 +195,14 @@ export default Component.extend({
     this._super(...arguments);
     this.set('registerAs', this);
 
+    let swiperOptions = assign(
+      { initialSlide: this.get('currentSlide') },
+      this._getOptions()
+    );
+
     this
-      .set('_swiper', new Swiper(this.element, this._getOptions()))
-      .on('onSlideChangeEnd', this.slideChanged.bind(this))
-      .slideTo(this.get('currentSlide'));
+      .set('_swiper', new Swiper(this.element, swiperOptions))
+      .on('onSlideChangeEnd', this.slideChanged.bind(this));
 
     this.sendAction('afterSwiperInit', this);
   },
