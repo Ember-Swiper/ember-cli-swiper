@@ -187,3 +187,20 @@ test('it triggers `swiper.update()` when `updateFor` is updated', function(asser
 
   this.set('updateFor', 'updateTranslate');
 });
+
+test('it autoplays with custom `currentSlide`', function(assert) {
+  this.on('autoplay', () => {
+    assert.ok(
+      this.$('.swiper-slide').last().hasClass('swiper-slide-active'),
+      'set slide at index 2 to active'
+    );
+  });
+
+  this.render(hbs`
+    {{#swiper-container autoplay=1 currentSlide=1 onAutoplay=(action "autoplay") as |sc|}}
+      {{swiper-slide}}
+      {{swiper-slide}}
+      {{swiper-slide}}
+    {{/swiper-container}}
+  `);
+});
