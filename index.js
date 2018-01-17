@@ -32,11 +32,9 @@ module.exports = {
     return new mergeTrees(trees);
   },
 
-  included: function(app) {
+  included: function(/* app */) {
     this._super.included.apply(this, arguments);
-
-    this.app.import('vendor/swiper/js/swiper.min.js');
-    this.app.import('vendor/swiper/css/swiper.min.css');
+    this.import('vendor/swiper/js/swiper.min.js');
+    this.import('vendor/swiper/css/swiper.min.css');
   }
-
 };
