@@ -25,7 +25,7 @@ Make sure you are using a somewhat recent version of nodejs when installing. Eve
 
 ## Options
 
-All [available Swiper options](https://github.com/nolimits4web/Swiper/blob/Swiper3/API.md) are supported and can be configured two ways:
+All [available Swiper options](http://idangero.us/swiper/api) are supported and can be configured two ways:
 
 As top level attributes:
 ```handlebars
