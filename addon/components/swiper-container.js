@@ -90,7 +90,7 @@ export default Component.extend({
    * @return {Object}
    */
   _getOptions() {
-    let attrs = getProperties(this, ...keys(this.attrs));
+    let attrs = getProperties(this, ...keys(this.attrs)); // eslint-disable-line ember/no-attrs-in-components
     let options = assign({}, this.get('options'), attrs);
 
     /*
@@ -156,12 +156,17 @@ export default Component.extend({
     this.get('_swiper').slideTo(this.get('currentSlide'));
   },
 
+  /**
+   * Update `currentSlide` and trigger `onChange` event
+   * @private
+   * @param {Object} swiper - Swiper instance
+   */
   slideChanged(swiper) {
     let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
 
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
-    this.sendAction('onChange', swiper.slides[swiper.activeIndex]);
+    this.get('onChange')(swiper.slides[swiper.activeIndex]);
   },
 
   didUpdateAttrs() {
@@ -204,7 +209,7 @@ export default Component.extend({
       .set('_swiper', new Swiper(this.element, swiperOptions))
       .on('onSlideChangeEnd', this.slideChanged.bind(this));
 
-    this.sendAction('afterSwiperInit', this);
+    this.get('afterSwiperInit')(this);
   },
 
   willDestroyElement() {
@@ -215,5 +220,19 @@ export default Component.extend({
       this.get('_swiper').destroy();
       this.set('_swiper', null);
     }
-  }
+  },
+
+  /**
+   * On Swiper Slide change
+   * @public
+   * @param {Swiper.Slide} swiperSlide
+   */
+  onChange(/* swiperSlide */) {},
+
+  /**
+   * Invoked after Swiper instance creation
+   * @public
+   * @param {Ember.Component} component
+   */
+  afterSwiperInit(/* component */) {}
 });
