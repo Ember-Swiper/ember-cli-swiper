@@ -7,8 +7,6 @@ See the [demo](http://ember-swiper.github.io/ember-cli-swiper/) for examples and
 Installation
 ------------------------------------------------------------------------------
 
-Make sure you are using a somewhat recent version of nodejs when installing. Everything > 4 should be fine.
-
 `ember install ember-cli-swiper`
 
 ## Usage
@@ -47,7 +45,5 @@ Controller.extend({
 Please note that attribute values will overwrite any conflicting options.
 
 ## Running tests
-
-The test-execution requires you to have phantomjs 2.x.x installed.
 
 `ember test`
