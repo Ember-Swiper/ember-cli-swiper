@@ -1,32 +1,34 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { find, render } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('swiper-slide', 'Integration | Component | swiper slide', {
-  integration: true
-});
+module('Integration | Component | swiper slide', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.render(hbs`{{swiper-slide}}`);
-  assert.equal(this.$().text().trim(), '');
+  test('it renders', async function(assert) {
+    await render(hbs`{{swiper-slide}}`);
+    assert.equal(find('*').textContent.trim(), '');
 
-  this.render(hbs`
-    {{#swiper-slide}}
-      template block text
-    {{/swiper-slide}}
-  `);
-  assert.equal(this.$().text().trim(), 'template block text');
-});
+    await render(hbs`
+      {{#swiper-slide}}
+        template block text
+      {{/swiper-slide}}
+    `);
+    assert.equal(find('*').textContent.trim(), 'template block text');
+  });
 
-test('predefined classes are added', function(assert) {
-  this.render(hbs`{{swiper-slide}}`);
-  assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
+  test('predefined classes are added', async function(assert) {
+    await render(hbs`{{swiper-slide id="slide"}}`);
+    assert.ok(find('#slide').classList.contains('swiper-slide'));
 
-  this.render(hbs`{{swiper-slide class='foo bar'}}`);
-  assert.ok(this.$('>:first-child').hasClass('swiper-slide'));
-});
+    await render(hbs`{{swiper-slide id="slide" class="foo bar"}}`);
+    assert.ok(find('#slide').classList.contains('swiper-slide'));
+  });
 
-test('own classes are added', function(assert) {
-  this.render(hbs`{{swiper-slide class='foo bar'}}`);
-  assert.ok(this.$('>:first-child').hasClass('foo'));
-  assert.ok(this.$('>:first-child').hasClass('bar'));
+  test('own classes are added', async function(assert) {
+    await render(hbs`{{swiper-slide id="slide" class="foo bar"}}`);
+    assert.ok(find('#slide').classList.contains('foo'));
+    assert.ok(find('#slide').classList.contains('bar'));
+  });
 });
