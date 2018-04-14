@@ -104,7 +104,7 @@ test('it supports `effect` attribute', function(assert) {
 test('on initialization, calls `afterSwiperInit` with the swiper container component if `afterSwiperInit` is passed in', function(assert) {
   this.set('actions.afterSwiperInit', () => {});
   let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
-  this.render(hbs`{{swiper-container afterSwiperInit="afterSwiperInit" registerAs=superDuperSwiper}}`);
+  this.render(hbs`{{swiper-container afterSwiperInit=(action "afterSwiperInit") registerAs=superDuperSwiper}}`);
   assert.equal(spy.callCount, 1);
   assert.equal(spy.getCall(0).args[0], this.get('superDuperSwiper'));
 });
