@@ -12,7 +12,7 @@ module.exports = {
     let swiperPath = path.join(path.dirname(require.resolve('swiper')), '..');
     let browserVendorLib = new Funnel(swiperPath, {
       destDir: 'swiper',
-      include: ['js/swiper.min.js', 'css/swiper.min.css']
+      include: ['js/swiper.js', 'css/swiper.css']
     });
 
     browserVendorLib = map(browserVendorLib, (content, relativePath) => {
