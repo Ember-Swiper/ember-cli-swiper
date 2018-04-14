@@ -4,7 +4,8 @@ Simple ember-wrapper around [Swiper by idangerous](http://idangero.us/swiper/dem
 
 See the [demo](http://ember-swiper.github.io/ember-cli-swiper/) for examples and usage-infos.
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 Make sure you are using a somewhat recent version of nodejs when installing. Everything > 4 should be fine.
 

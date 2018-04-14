@@ -146,7 +146,7 @@
 
 <p>The configured action receives the HTML-Element of the selected slide.</p>
 
-{{#swiper-container onChange='addToHistory'}}
+{{#swiper-container onChange=(action 'addToHistory')}}
   {{#swiper-slide}}Slide 1{{/swiper-slide}}
   {{#swiper-slide}}Slide 2{{/swiper-slide}}
   {{#swiper-slide}}Slide 3{{/swiper-slide}}
@@ -158,7 +158,7 @@
 <textarea>{{selectionHistory}}</textarea>
 
 <pre>
-  \{{#swiper-container onChange='addToHistory'}}
+  \{{#swiper-container onChange=(action 'addToHistory')}}
     \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
     \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
     \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
