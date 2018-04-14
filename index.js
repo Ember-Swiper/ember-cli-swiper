@@ -33,7 +33,7 @@ module.exports = {
 
   included(/* app */) {
     this._super.included.apply(this, arguments);
-    this.import('vendor/swiper/js/swiper.min.js');
-    this.import('vendor/swiper/css/swiper.min.css');
+    this.import('vendor/swiper/js/swiper.js');
+    this.import('vendor/swiper/css/swiper.css');
   }
 };
