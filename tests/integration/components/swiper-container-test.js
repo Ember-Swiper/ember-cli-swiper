@@ -83,7 +83,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
     assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'));
 
-    this.set('opts', { pagination: true });
+    this.set('opts', { pagination: { type: 'progressbar' } });
     await render(hbs`{{swiper-container id="swp-container" options=opts}}`);
     assert.ok(find('#swp-container').querySelector('.swiper-pagination'));
   });
