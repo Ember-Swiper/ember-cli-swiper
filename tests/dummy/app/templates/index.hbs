@@ -42,7 +42,7 @@
   \{{/swiper-container}}
 </pre>
 
-<h3>Infinite + Pagination + extra classes</h3>
+<h3>Infinite + Pagination</h3>
 
 {{#swiper-container pagination=true loop=true}}
   {{#swiper-slide class='myslide myslide-1'}}Slide 1{{/swiper-slide}}
@@ -124,7 +124,7 @@
 
 <h3>Keyboard + Mousewheel Control</h3>
 
-{{#swiper-container keyboardControl=true mousewheelControl=true slidesPerView=2}}
+{{#swiper-container keyboard=true mousewheel=true slidesPerView=2}}
   {{#swiper-slide}}Slide 1{{/swiper-slide}}
   {{#swiper-slide}}Slide 2{{/swiper-slide}}
   {{#swiper-slide}}Slide 3{{/swiper-slide}}
@@ -133,7 +133,7 @@
 {{/swiper-container}}
 
 <pre>
-  \{{#swiper-container keyboardControl=true mousewheelControl=true slidesPerView=2}}
+  \{{#swiper-container keyboard=true mousewheel=true slidesPerView=2}}
     \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
     \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
     \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
@@ -239,7 +239,7 @@ Current Slideindex: {{currentSlide2}}
   the container after initialization. For those scenarios you can force a refresh of the component via your
   controller</p>
 
-<p><code>forceUpdate()</code> also comes with an optional boolean parameter <code>updateTranslate</code> which
+<p><code>forceUpdate()</code> alsorcomes with an optional boolean parameter <code>updateTranslate</code> which
   defaults to false. See <a href="http://idangero.us/swiper/api/#methods">the Swiper docs</a> for more details.</p>
 
 <strong>Template</strong>

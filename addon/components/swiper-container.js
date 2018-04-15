@@ -7,6 +7,7 @@ import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
 import { or } from '@ember/object/computed';
+import { typeOf } from '@ember/utils';
 
 import layout from '../templates/components/swiper-container';
 
@@ -93,15 +94,22 @@ export default Component.extend({
     let attrs = getProperties(this, ...keys(this.attrs)); // eslint-disable-line ember/no-attrs-in-components
     let options = assign({}, this.get('options'), attrs);
 
-    /*
-     Automatically configure pagination set to `true`
-     */
-    if (options.pagination === true) {
-      options.pagination = `#${this.get('elementId')} > .swiper-pagination`;
-    }
-
+    // Enforce pagination element configuration
     if (options.pagination) {
-      options.paginationClickable = true; // paginated must be clickable
+      let paginationSelector = `#${this.get('elementId')} > .swiper-pagination`;
+
+      typeOf(options.pagination) === 'object'
+        ? options.pagination.el = paginationSelector
+        : options.pagination = { el: paginationSelector };
+
+      warn(
+        'ember-cli-swiper option `pagination.clickable` is forcing true',
+        typeof options.pagination.clickable === 'undefined' || options.pagination.clickable === true,
+        { id: 'ember-cli-swiper.force-pagination-clickable' }
+      );
+
+      options.pagination.clickable = true; // must be clickable
+      options.pagination.lockClass = options.pagination.lockClass || 'swiper-pagination-lock'; // must be set
     }
 
     if (options.navigation) {
@@ -162,11 +170,10 @@ export default Component.extend({
    * @param {Object} swiper - Swiper instance
    */
   slideChanged(swiper) {
-    let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.activeIndex;
-
+    let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.realIndex;
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
-    this.get('onChange')(swiper.slides[swiper.activeIndex]);
+    this.get('onChange')(swiper.slides[swiper.realIndex]);
   },
 
   didUpdateAttrs() {
@@ -205,9 +212,8 @@ export default Component.extend({
       this._getOptions()
     );
 
-    this
-      .set('_swiper', new Swiper(this.element, swiperOptions))
-      .on('onSlideChangeEnd', this.slideChanged.bind(this));
+    let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
+    instance.on('slideChangeTransitionEnd', this.slideChanged.bind(this, instance));
 
     this.get('afterSwiperInit')(this);
   },
