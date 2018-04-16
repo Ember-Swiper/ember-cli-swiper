@@ -114,14 +114,6 @@ module('Integration | Component | swiper container', function(hooks) {
       'Container has `fade` class');
   });
 
-  test('on initialization, calls `afterSwiperInit` with the swiper container component if `afterSwiperInit` is passed in', async function(assert) {
-    this.set('actions.afterSwiperInit', () => {});
-    let spy = sinon.spy(this.get('actions'), 'afterSwiperInit');
-    await render(hbs`{{swiper-container afterSwiperInit=(action "afterSwiperInit") registerAs=superDuperSwiper}}`);
-    assert.equal(spy.callCount, 1);
-    assert.equal(spy.getCall(0).args[0], this.get('superDuperSwiper'));
-  });
-
   test('it destroys the Swiper instance when component element destroyed', async function(assert) {
     assert.expect(2);
     this.set('componentInstance', null);
@@ -223,6 +215,8 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('it autoplays with custom `currentSlide`', async function(assert) {
+    assert.expect(1);
+
     this.actions.autoplay = () => {
       let lastSlide = Array.from(findAll('.swiper-slide')).pop();
 
@@ -233,7 +227,8 @@ module('Integration | Component | swiper container', function(hooks) {
     };
 
     await render(hbs`
-      {{#swiper-container autoplay=1 currentSlide=1 onAutoplay=(action "autoplay") as |sc|}}
+      {{#swiper-container autoplay=1 currentSlide=1 events=(hash
+        autoplay=(action "autoplay")) as |sc|}}
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
