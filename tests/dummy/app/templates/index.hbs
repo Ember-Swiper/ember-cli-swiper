@@ -42,6 +42,20 @@
   \{{/swiper-container}}
 </pre>
 
+<h3>Swiper Events</h3>
+
+{{#swiper-container events=(hash reachEnd=(action "onSwiperEnd"))}}
+  {{#swiper-slide}}Start{{/swiper-slide}}
+  {{#swiper-slide}}End{{/swiper-slide}}
+{{/swiper-container}}
+
+<pre>
+  \{{#swiper-container events=(hash reachEnd=(action "onSwiperEnd"))}}
+    \{{#swiper-slide}}Start\{{/swiper-slide}}
+    \{{#swiper-slide}}End\{{/swiper-slide}}
+  \{{/swiper-container}}
+</pre>
+
 <h3>Infinite + Pagination</h3>
 
 {{#swiper-container pagination=true loop=true}}
@@ -239,7 +253,7 @@ Current Slideindex: {{currentSlide2}}
   the container after initialization. For those scenarios you can force a refresh of the component via your
   controller</p>
 
-<p><code>forceUpdate()</code> alsorcomes with an optional boolean parameter <code>updateTranslate</code> which
+<p><code>forceUpdate()</code> also comes with an optional boolean parameter <code>updateTranslate</code> which
   defaults to false. See <a href="http://idangero.us/swiper/api/#methods">the Swiper docs</a> for more details.</p>
 
 <strong>Template</strong>
