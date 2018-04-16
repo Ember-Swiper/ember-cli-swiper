@@ -154,6 +154,11 @@ export default Component.extend({
       options.centeredSlides = true;
     }
 
+    // Allows `init` event to fire
+    if (this.get('events.init')) {
+      options.init = false;
+    }
+
     /*
      Remove component-only
      configuration options from Swiper options
@@ -228,6 +233,11 @@ export default Component.extend({
     keys(this.get('events')).forEach((evt) =>
       instance.on(evt, this.get(`events.${evt}`))
     );
+
+    // Manual initalization when user requires `init` event handling
+    if (swiperOptions.init === false) {
+      instance.init();
+    }
   },
 
   willDestroyElement() {
