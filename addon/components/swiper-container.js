@@ -49,6 +49,12 @@ export default Component.extend({
   _currentSlideInternal: 0,
 
   /**
+   * User defined map of Swiper events
+   * @type {Object}
+   */
+  events: computed(() => Object.create(null)),
+
+  /**
    * Abstraction to invoke `Swiper.update`
    * @public
    * @type {String}
@@ -217,15 +223,21 @@ export default Component.extend({
 
     let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
     instance.on('slideChangeTransitionEnd', this._slideChanged.bind(this, instance));
+
+    // Subscribe configured actions as Swiper events
+    keys(this.get('events')).forEach((evt) =>
+      instance.on(evt, this.get(`events.${evt}`))
+    );
   },
 
   willDestroyElement() {
     this._super(...arguments);
+    let instance = this.get('_swiper');
 
-    if (this.get('_swiper')) {
-      this.get('_swiper').off('slideChangeTransitionEnd');
-      this.get('_swiper').destroy();
-      this.set('_swiper', null);
+    if (instance) {
+      instance.off('slideChangeTransitionEnd');
+      instance.destroy();
+      instance = this.set('_swiper', null);
     }
   },
 
