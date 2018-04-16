@@ -140,15 +140,32 @@ module('Integration | Component | swiper container', function(hooks) {
     });
   });
 
-  test('it removes all `onSlideChangeEnd` handlers when component element destroyed', async function(assert) {
+  test('it removes all `slideChangeTransitionEnd` handlers when component element destroyed', async function(assert) {
     assert.expect(1);
     this.set('componentInstance', null);
-    await render(hbs`{{swiper-container registerAs=componentInstance}}`);
+    this.set('rendered', true);
+
+    await render(hbs`{{#if rendered}}{{swiper-container registerAs=componentInstance}}{{/if}}`);
 
     let componentInstance = this.get('componentInstance');
+    let swiperInstance = componentInstance._swiper;
+    let originalDestroy = swiperInstance.destroy;
+    let originalSwiperOff = swiperInstance.off;
 
-    sinon.stub(componentInstance._swiper, 'off').callsFake((evt) =>
-      assert.strictEqual(evt, 'onSlideChangeEnd')).callThrough();
+    swiperInstance.off = (evt, ...args) => {
+      if (evt === 'slideChangeTransitionEnd') {
+        assert.ok(true, 'slideChangeTransitionEnd');
+      }
+      originalSwiperOff.apply(swiperInstance, [evt, ...args]);
+    };
+
+    swiperInstance.destroy = (...args) => {
+      swiperInstance.off = originalSwiperOff;
+      swiperInstance.destroy = originalDestroy;
+      originalDestroy.apply(swiperInstance, ...args);
+    };
+
+    this.set('rendered', false); // trigger swipper destroy
   });
 
   test('it yields a slide component', async function(assert) {
