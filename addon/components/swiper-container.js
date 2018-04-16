@@ -7,7 +7,6 @@ import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
 import { or } from '@ember/object/computed';
-import { typeOf } from '@ember/utils';
 
 import layout from '../templates/components/swiper-container';
 
@@ -94,22 +93,23 @@ export default Component.extend({
     let attrs = getProperties(this, ...keys(this.attrs)); // eslint-disable-line ember/no-attrs-in-components
     let options = assign({}, this.get('options'), attrs);
 
-    // Enforce pagination element configuration
+    // Overwrite pagination element selector
     if (options.pagination) {
-      let paginationSelector = `#${this.get('elementId')} > .swiper-pagination`;
-
-      typeOf(options.pagination) === 'object'
-        ? options.pagination.el = paginationSelector
-        : options.pagination = { el: paginationSelector };
-
-      warn(
-        'ember-cli-swiper option `pagination.clickable` is forcing true',
-        typeof options.pagination.clickable === 'undefined' || options.pagination.clickable === true,
-        { id: 'ember-cli-swiper.force-pagination-clickable' }
+      let customPaginationEl = (
+        (typeof options.pagination === 'string' && options.pagination)       // custom string selector
+        || (typeof options.pagination === 'object' && options.pagination.el) // custom `el` option selector
+        || ''
       );
 
-      options.pagination.clickable = true; // must be clickable
-      options.pagination.lockClass = options.pagination.lockClass || 'swiper-pagination-lock'; // must be set
+      // Note:
+      //  Never resolve user provided pagination configuration,
+      //  which may not extend Object.prototype creating hard to
+      //  debug issues within Swiper.
+      options.pagination = assign(
+        { clickable: customPaginationEl ? true : false }, // custom paginations must be clickable
+        typeof options.pagination === 'object' ? options.pagination : {},
+        { el: customPaginationEl || `#${this.get('elementId')} > .swiper-pagination` }
+      );
     }
 
     if (options.navigation) {

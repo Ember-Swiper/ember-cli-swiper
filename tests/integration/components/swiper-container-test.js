@@ -73,19 +73,24 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('pagination node is present if requested', async function(assert) {
     await render(hbs`{{swiper-container id="swp-container" pagination=false}}`);
-    assert.notOk(find('#swp-container').querySelector('.swiper-pagination'));
+    assert.notOk(find('#swp-container').querySelector('.swiper-pagination'), 'pagination not rendered');
 
     await render(hbs`{{swiper-container id="swp-container" pagination=true}}`);
-    assert.ok(find('#swp-container').querySelector('.swiper-pagination'));
+    assert.ok(find('#swp-container').querySelector('.swiper-pagination'), 'pagination is rendered');
 
     await render(
-      hbs`{{#swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>{{/swiper-container}}`
+      hbs`{{swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>`
     );
-    assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'));
+    assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'), 'custom pagination element selector configured');
+
+    await render(
+      hbs`{{swiper-container pagination=(hash el=".custom-pagination")}}<div class="custom-pagination"></div>`
+    );
+    assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'), 'custom pagination object element selector configured');
 
     this.set('opts', { pagination: { type: 'progressbar' } });
     await render(hbs`{{swiper-container id="swp-container" options=opts}}`);
-    assert.ok(find('#swp-container').querySelector('.swiper-pagination'));
+    assert.ok(find('#swp-container').querySelector('.swiper-pagination-progressbar'), 'pagination object rendered');
   });
 
   test('navigation buttons are present if requested', async function(assert) {
