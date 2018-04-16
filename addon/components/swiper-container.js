@@ -20,7 +20,6 @@ const EMBER_CLI_SWIPER_OPTIONS = [
   'vertical',
   'centered',
   'updateFor',
-  'afterSwiperInit',
   'currentSlide'
 ];
 
@@ -214,8 +213,6 @@ export default Component.extend({
 
     let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
     instance.on('slideChangeTransitionEnd', this.slideChanged.bind(this, instance));
-
-    this.get('afterSwiperInit')(this);
   },
 
   willDestroyElement() {
@@ -233,12 +230,5 @@ export default Component.extend({
    * @public
    * @param {Swiper.Slide} swiperSlide
    */
-  onChange(/* swiperSlide */) {},
-
-  /**
-   * Invoked after Swiper instance creation
-   * @public
-   * @param {Ember.Component} component
-   */
-  afterSwiperInit(/* component */) {}
+  onChange(/* swiperSlide */) {}
 });
