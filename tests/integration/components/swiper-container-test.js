@@ -133,7 +133,6 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('it removes all `slideChangeTransitionEnd` handlers when component element destroyed', async function(assert) {
-    assert.expect(1);
     this.set('componentInstance', null);
     this.set('rendered', true);
 
@@ -200,8 +199,6 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('it triggers `swiper.update()` when `updateFor` is updated', async function(assert) {
-    assert.expect(1);
-
     this.set('updateFor', '');
     await render(hbs`
       {{swiper-container updateFor=updateFor registerAs=componentInstance}}`);
@@ -214,21 +211,34 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('updateFor', 'updateTranslate');
   });
 
-  test('it autoplays with custom `currentSlide`', async function(assert) {
-    assert.expect(1);
+  test('it subscribes `events` actions map as Swiper events', async function(assert) {
+    this.actions.onBeforeDestroy = () => assert.ok(true);
 
-    this.actions.autoplay = () => {
+    await render(hbs`
+      {{swiper-container events=(hash beforeDestroy=(action "onBeforeDestroy"))}}`);
+  });
+
+  test('it triggers `autoplay` with custom `currentSlide`', async function(assert) {
+    let run = false;
+
+    this.actions.onAutoplay = () => {
+      if (run) {
+        return true;
+      }
+
       let lastSlide = Array.from(findAll('.swiper-slide')).pop();
 
       assert.ok(
         lastSlide && lastSlide.classList.contains('swiper-slide-active'),
         'set slide at index 2 to active'
       );
+
+      run = true;
     };
 
     await render(hbs`
-      {{#swiper-container autoplay=1 currentSlide=1 events=(hash
-        autoplay=(action "autoplay")) as |sc|}}
+      {{#swiper-container autoplay=(hash delay=10) currentSlide=1 events=(hash
+        autoplay=(action "onAutoplay")) as |sc|}}
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
