@@ -222,7 +222,7 @@ export default Component.extend({
     this._super(...arguments);
 
     if (this.get('_swiper')) {
-      this.get('_swiper').off('onSlideChangeEnd');
+      this.get('_swiper').off('slideChangeTransitionEnd');
       this.get('_swiper').destroy();
       this.set('_swiper', null);
     }
