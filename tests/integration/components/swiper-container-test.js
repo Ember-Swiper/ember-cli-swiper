@@ -218,6 +218,14 @@ module('Integration | Component | swiper container', function(hooks) {
       {{swiper-container events=(hash beforeDestroy=(action "onBeforeDestroy"))}}`);
   });
 
+  test('it supports manual swiper initialization when `init` event configured', async function(assert) {
+    this.set('componentInstance', null);
+    this.actions.onInit = () => assert.ok(true, 'invoked init handler');
+
+    await render(hbs`
+      {{swiper-container registerAs=componentInstance events=(hash init=(action "onInit"))}}`);
+  });
+
   test('it triggers `autoplay` with custom `currentSlide`', async function(assert) {
     let run = false;
 
