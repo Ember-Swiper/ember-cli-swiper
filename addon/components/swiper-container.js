@@ -158,8 +158,12 @@ export default Component.extend({
     return options;
   },
 
-  forceUpdate(updateTranslate) {
-    this.get('_swiper').update(updateTranslate === undefined ? false : updateTranslate);
+  /**
+   * Userland fallback sugar for forcing swiper update
+   * @public
+   */
+  forceUpdate() {
+    this.get('_swiper').update();
     this.get('_swiper').slideTo(this.get('currentSlide'));
   },
 
@@ -168,7 +172,7 @@ export default Component.extend({
    * @private
    * @param {Object} swiper - Swiper instance
    */
-  slideChanged(swiper) {
+  _slideChanged(swiper) {
     let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.realIndex;
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
@@ -212,7 +216,7 @@ export default Component.extend({
     );
 
     let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
-    instance.on('slideChangeTransitionEnd', this.slideChanged.bind(this, instance));
+    instance.on('slideChangeTransitionEnd', this._slideChanged.bind(this, instance));
   },
 
   willDestroyElement() {
