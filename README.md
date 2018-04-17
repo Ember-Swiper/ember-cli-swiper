@@ -32,12 +32,10 @@ As top level attributes:
 
 As a hash of options:
 ```js
-{{!--
 // In controller
 Controller.extend({
   myOptions: { parallax: true }
 });
---}}
 
 {{swiper-container options=myOptions}}
 ```
