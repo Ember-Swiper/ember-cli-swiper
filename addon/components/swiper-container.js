@@ -11,11 +11,10 @@ import { or } from '@ember/object/computed';
 import layout from '../templates/components/swiper-container';
 
 const { keys } = Object;
-const assign = (Object.assign || emAssign);
+const assign = Object.assign || emAssign;
 
 const EMBER_CLI_SWIPER_OPTIONS = [
   'options',
-  'navigation',
   'registerAs',
   'vertical',
   'centered',
@@ -76,6 +75,20 @@ export default Component.extend({
   hasNavigation: or('options.navigation', 'navigation'),
 
   /**
+   * Swiper next element class
+   * @public
+   * @type {String}
+   */
+  nextElClass: 'swiper-button-next',
+
+  /**
+   * Swiper previous element class
+   * @public
+   * @type {String}
+   */
+  prevElClass: 'swiper-button-prev',
+
+  /**
    * Render pagination controls
    * @public
    * @type {Boolean}
@@ -100,11 +113,10 @@ export default Component.extend({
 
     // Overwrite pagination element selector
     if (options.pagination) {
-      let customPaginationEl = (
-        (typeof options.pagination === 'string' && options.pagination)       // custom string selector
+      let customPaginationEl
+        = (typeof options.pagination === 'string' && options.pagination) // custom string selector
         || (typeof options.pagination === 'object' && options.pagination.el) // custom `el` option selector
-        || ''
-      );
+        || '';
 
       // Note:
       //  Never resolve user provided pagination configuration,
@@ -113,25 +125,34 @@ export default Component.extend({
       options.pagination = assign(
         { clickable: customPaginationEl ? true : false }, // custom paginations must be clickable
         typeof options.pagination === 'object' ? options.pagination : {},
-        { el: customPaginationEl || `#${this.get('elementId')} > .swiper-pagination` }
+        {
+          el:
+            customPaginationEl
+            || `#${this.get('elementId')} > .swiper-pagination`
+        }
       );
     }
 
     if (options.navigation) {
-      warn(
-        'ember-cli-swiper option `nextButton` is ignored while `navigation` true',
-        !options.nextButton,
-        { id: 'ember-cli-swiper.next-button-with-navigation' }
-      );
+      if (typeof options.navigation !== 'object') {
+        options.navigation = {};
+      }
 
-      warn(
-        'ember-cli-swiper option `prevButton` is ignored while `navigation` true',
-        !options.prevButton,
-        { id: 'ember-cli-swiper.prev-button-with-navigation' }
-      );
+      // Sync prev/next nav classes to custom options
+      if (typeof options.navigation.prevEl === 'string') {
+        this.set('prevElClass', options.navigation.prevEl.replace('.', ''));
+      }
 
-      options.nextButton = '.swiper-button-next';
-      options.prevButton = '.swiper-button-prev';
+      if (typeof options.navigation.nextEl === 'string') {
+        this.set('nextElClass', options.navigation.nextEl.replace('.', ''));
+      }
+
+      // Ensure `nextEl` & `prevEl` required options set
+      // and that navigation inherits from Object.prototype
+      options.navigation = assign({}, options.navigation, {
+        nextEl: `.${this.get('nextElClass')}`,
+        prevEl: `.${this.get('prevElClass')}`
+      });
     }
 
     if (options.vertical) {
@@ -163,8 +184,9 @@ export default Component.extend({
      Remove component-only
      configuration options from Swiper options
      */
-    keys(options).forEach((k) =>
-      EMBER_CLI_SWIPER_OPTIONS.indexOf(k) !== -1 && delete options[k]);
+    keys(options).forEach(
+      (k) => EMBER_CLI_SWIPER_OPTIONS.indexOf(k) !== -1 && delete options[k]
+    );
 
     return options;
   },
@@ -184,7 +206,11 @@ export default Component.extend({
    * @param {Object} swiper - Swiper instance
    */
   _slideChanged(swiper) {
-    let index = this.get('loop') ? $(swiper.slides).filter('.swiper-slide-active').attr('data-swiper-slide-index') : swiper.realIndex;
+    let index = this.get('loop')
+      ? $(swiper.slides)
+        .filter('.swiper-slide-active')
+        .attr('data-swiper-slide-index')
+      : swiper.realIndex;
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
@@ -201,7 +227,9 @@ export default Component.extend({
 
       if (this.get('loop')) {
         let swiper = this.get('_swiper');
-        index = $(swiper.slides).filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`).prevAll().length;
+        index = $(swiper.slides)
+          .filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`)
+          .prevAll().length;
       }
 
       this.get('_swiper').slideTo(index);
@@ -227,7 +255,10 @@ export default Component.extend({
     );
 
     let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
-    instance.on('slideChangeTransitionEnd', this._slideChanged.bind(this, instance));
+    instance.on(
+      'slideChangeTransitionEnd',
+      this._slideChanged.bind(this, instance)
+    );
 
     // Subscribe configured actions as Swiper events
     keys(this.get('events')).forEach((evt) =>
