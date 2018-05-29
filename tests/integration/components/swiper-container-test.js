@@ -1,4 +1,4 @@
-import { find, findAll, render } from '@ember/test-helpers';
+import { find, findAll, render, click } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -10,7 +10,8 @@ module('Integration | Component | swiper container', function(hooks) {
 
   hooks.beforeEach(function() {
     this.actions = {};
-    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+    this.send = (actionName, ...args) =>
+      this.actions[actionName].apply(this, args);
   });
 
   test('it renders', async function(assert) {
@@ -29,7 +30,9 @@ module('Integration | Component | swiper container', function(hooks) {
     let expected = false;
 
     this.set('noSwiping', expected);
-    await render(hbs`{{swiper-container noSwiping=noSwiping registerAs=componentInstanceAttr}}`);
+    await render(
+      hbs`{{swiper-container noSwiping=noSwiping registerAs=componentInstanceAttr}}`
+    );
 
     assert.strictEqual(
       this.get('componentInstanceAttr._swiper.params.noSwiping'),
@@ -38,7 +41,9 @@ module('Integration | Component | swiper container', function(hooks) {
     );
 
     this.set('options', { noSwiping: expected });
-    await render(hbs`{{swiper-container options=options registerAs=componentInstanceOpts}}`);
+    await render(
+      hbs`{{swiper-container options=options registerAs=componentInstanceOpts}}`
+    );
 
     assert.strictEqual(
       this.get('componentInstanceOpts._swiper.params.noSwiping'),
@@ -52,7 +57,9 @@ module('Integration | Component | swiper container', function(hooks) {
 
     this.set('effect', expected);
     this.set('options', { effect: 'cube' });
-    await render(hbs`{{swiper-container effect=effect options=options registerAs=componentInstanceAttr}}`);
+    await render(
+      hbs`{{swiper-container effect=effect options=options registerAs=componentInstanceAttr}}`
+    );
 
     assert.strictEqual(
       this.get('componentInstanceAttr._swiper.params.effect'),
@@ -73,24 +80,43 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('pagination node is present if requested', async function(assert) {
     await render(hbs`{{swiper-container id="swp-container" pagination=false}}`);
-    assert.notOk(find('#swp-container').querySelector('.swiper-pagination'), 'pagination not rendered');
+    assert.notOk(
+      find('#swp-container').querySelector('.swiper-pagination'),
+      'pagination not rendered'
+    );
 
     await render(hbs`{{swiper-container id="swp-container" pagination=true}}`);
-    assert.ok(find('#swp-container').querySelector('.swiper-pagination'), 'pagination is rendered');
+    assert.ok(
+      find('#swp-container').querySelector('.swiper-pagination'),
+      'pagination is rendered'
+    );
 
     await render(
       hbs`{{swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>`
     );
-    assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'), 'custom pagination element selector configured');
+    assert.ok(
+      find('.custom-pagination').classList.contains(
+        'swiper-pagination-clickable'
+      ),
+      'custom pagination element selector configured'
+    );
 
     await render(
       hbs`{{swiper-container pagination=(hash el=".custom-pagination")}}<div class="custom-pagination"></div>`
     );
-    assert.ok(find('.custom-pagination').classList.contains('swiper-pagination-clickable'), 'custom pagination object element selector configured');
+    assert.ok(
+      find('.custom-pagination').classList.contains(
+        'swiper-pagination-clickable'
+      ),
+      'custom pagination object element selector configured'
+    );
 
     this.set('opts', { pagination: { type: 'progressbar' } });
     await render(hbs`{{swiper-container id="swp-container" options=opts}}`);
-    assert.ok(find('#swp-container').querySelector('.swiper-pagination-progressbar'), 'pagination object rendered');
+    assert.ok(
+      find('#swp-container').querySelector('.swiper-pagination-progressbar'),
+      'pagination object rendered'
+    );
   });
 
   test('navigation buttons are present if requested', async function(assert) {
@@ -110,8 +136,10 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('it supports `effect` attribute', async function(assert) {
     await render(hbs`{{swiper-container id="swp-container" effect="fade"}}`);
-    assert.ok(find('#swp-container.swiper-container-fade'),
-      'Container has `fade` class');
+    assert.ok(
+      find('#swp-container.swiper-container-fade'),
+      'Container has `fade` class'
+    );
   });
 
   test('it destroys the Swiper instance when component element destroyed', async function(assert) {
@@ -119,14 +147,18 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('componentInstance', null);
     this.set('active', true);
 
-    await render(hbs`{{#if active}}{{swiper-container registerAs=componentInstance}}{{/if}}`);
+    await render(
+      hbs`{{#if active}}{{swiper-container registerAs=componentInstance}}{{/if}}`
+    );
 
     run(() => {
       let componentInstance = this.get('componentInstance');
       assert.ok(componentInstance._swiper, 'Swiper intantiated');
 
-      sinon.stub(componentInstance._swiper, 'destroy').callsFake(() =>
-        assert.ok(true, 'destroy was called')).callThrough();
+      sinon
+        .stub(componentInstance._swiper, 'destroy')
+        .callsFake(() => assert.ok(true, 'destroy was called'))
+        .callThrough();
 
       this.set('active', false);
     });
@@ -136,7 +168,9 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('componentInstance', null);
     this.set('rendered', true);
 
-    await render(hbs`{{#if rendered}}{{swiper-container registerAs=componentInstance}}{{/if}}`);
+    await render(
+      hbs`{{#if rendered}}{{swiper-container registerAs=componentInstance}}{{/if}}`
+    );
 
     let componentInstance = this.get('componentInstance');
     let swiperInstance = componentInstance._swiper;
@@ -160,7 +194,9 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('it yields a slide component', async function(assert) {
-    await render(hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`);
+    await render(
+      hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`
+    );
     assert.equal(findAll('.swiper-slide').length, 1, 'renders a single slide');
   });
 
@@ -205,8 +241,10 @@ module('Integration | Component | swiper container', function(hooks) {
 
     let componentInstance = this.get('componentInstance');
 
-    sinon.stub(componentInstance._swiper, 'update').callsFake(() =>
-      assert.ok(true, 'called swiper.update')).callThrough();
+    sinon
+      .stub(componentInstance._swiper, 'update')
+      .callsFake(() => assert.ok(true, 'called swiper.update'))
+      .callThrough();
 
     this.set('updateFor', 'updateTranslate');
   });
@@ -252,5 +290,59 @@ module('Integration | Component | swiper container', function(hooks) {
         {{swiper-slide}}
       {{/swiper-container}}
     `);
+  });
+
+  test('it exposes default swiper navigation controls to `navigation=true`', async function(assert) {
+    await render(hbs`
+      {{#swiper-container navigation=true}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+      {{/swiper-container}}
+    `);
+
+    assert.ok(find('.swiper-button-next'), 'rendered nav next button');
+    assert.ok(find('.swiper-button-prev'), 'rendered nav prev button');
+
+    let slides = Array.from(findAll('.swiper-slide'));
+
+    await click('.swiper-button-next');
+
+    assert.ok(
+      slides[1].classList.contains('swiper-slide-active'),
+      'next button click handled'
+    );
+
+    await click('.swiper-button-prev');
+
+    assert.ok(
+      slides[0].classList.contains('swiper-slide-active'),
+      'previous button click handled'
+    );
+  });
+
+  test('it applies custom navigation hash of control selectors', async function(assert) {
+    await render(hbs`
+      {{#swiper-container navigation=(hash nextEl=".is-next" prevEl=".is-last")}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+      {{/swiper-container}}
+    `);
+
+    assert.ok(find('.is-next'), 'rendered custom nav next button');
+    assert.ok(find('.is-last'), 'rendered custom nav prev button');
+  });
+
+  test('it applies custom `navigation.disabledClass`', async function(assert) {
+    await render(hbs`
+      {{#swiper-container navigation=(hash disabledClass="is-disabled")}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+        {{swiper-slide}}
+      {{/swiper-container}}
+    `);
+
+    assert.ok(find('.is-disabled'), 'rendered custom disabled class');
   });
 });
