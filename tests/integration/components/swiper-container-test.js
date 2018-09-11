@@ -345,4 +345,26 @@ module('Integration | Component | swiper container', function(hooks) {
 
     assert.ok(find('.is-disabled'), 'rendered custom disabled class');
   });
+
+  test('it provides swiper instance as context of `update`', async function(assert) {
+    this.set('updateForValue', '');
+    this.set('componentInstance', null);
+
+    await render(
+      hbs`{{swiper-container registerAs=componentInstance updateFor=updateForValue}}`
+    );
+
+    let swiperInstance = this.get('componentInstance._swiper');
+    let originalUpdate = swiperInstance.update;
+    swiperInstance.update = function() {
+      assert.strictEqual(
+        this,
+        swiperInstance,
+        'update invoked with swiper context'
+      );
+      swiperInstance.update = originalUpdate;
+    };
+
+    this.set('updateForValue', 'trigger update');
+  });
 });
