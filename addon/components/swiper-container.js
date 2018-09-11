@@ -240,7 +240,7 @@ export default Component.extend({
      Trigger `update()` of swiper
      */
     if (this.get('updateFor') !== this.get('_updateForInternal')) {
-      once(this, this.get('_swiper').update);
+      once(this.get('_swiper'), 'update');
       this.set('_updateForInternal', this.get('updateFor'));
     }
   },
