@@ -215,7 +215,7 @@ export default Component.extend({
         }
       });
     } else {
-      index = swiper.activeIndex;
+      index = swiper.realIndex;
     }
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
