@@ -208,10 +208,8 @@ export default Component.extend({
 
     if (this.get('loop')) {
       Object.keys(swiper.slides).forEach((key) => {
-        if (swiper.slides[key].classList) {
-          if (swiper.slides[key].classList.contains('swiper-slide-active')) {
-            index = swiper.slides[key].getAttribute('data-swiper-slide-index');
-          }
+        if (swiper.slides[key].classList && swiper.slides[key].classList.contains('swiper-slide-active')) {
+          index = swiper.slides[key].getAttribute('data-swiper-slide-index');
         }
       });
     } else {
@@ -221,11 +219,21 @@ export default Component.extend({
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
   },
-
-  
+  /**
+   * Get all previous elements
+   * @private
+   * @param {Object} DOMElement - A Dom Element
+   * @return {Array}
+  */
+  prevAll(element) {
+    let result = [];
+    while (element = element.previousElementSibling) { /* eslint-disable-line no-cond-assign */
+      result.push(element);
+    }
+    return result;
+  },
   didUpdateAttrs() {
     this._super(...arguments);
-
     /*
      Data-down Swiper slide activation
      */
@@ -234,21 +242,9 @@ export default Component.extend({
 
       if (this.get('loop')) {
         let swiper = this.get('_swiper');
-
-        function prevAll(element) {
-          let result = [];
-        
-          while (element = element.previousElementSibling) { /* eslint-disable-line no-cond-assign */
-            result.push(element);
-          }
-          return result;
-        }
-
         Object.keys(swiper.slides).forEach((key) => {
-          if (swiper.slides[key].classList) {
-            if (swiper.slides[key].getAttribute('data-swiper-slide-index') === this.get('currentSlide')) {
-              index = prevAll(swiper.slides[key]).length;
-            }
+          if (swiper.slides[key].classList && swiper.slides[key].getAttribute('data-swiper-slide-index') === this.get('currentSlide')) {
+            index = this.prevAll(swiper.slides[key]).length;
           }
         });
 
