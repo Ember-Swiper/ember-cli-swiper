@@ -1,6 +1,4 @@
 /* globals Swiper */
-
-import $ from 'jquery';
 import Component from '@ember/component';
 import { getProperties, computed } from '@ember/object';
 import { once } from '@ember/runloop';
@@ -206,16 +204,25 @@ export default Component.extend({
    * @param {Object} swiper - Swiper instance
    */
   _slideChanged(swiper) {
-    let index = this.get('loop')
-      ? $(swiper.slides)
-        .filter('.swiper-slide-active')
-        .attr('data-swiper-slide-index')
-      : swiper.realIndex;
+    let index;
+
+    if (this.get('loop')) {
+      Object.keys(swiper.slides).forEach((key) => {
+        if (swiper.slides[key].classList) {
+          if (swiper.slides[key].classList.contains('swiper-slide-active')) {
+            index = swiper.slides[key].getAttribute('data-swiper-slide-index');
+          }
+        }
+      });
+    } else {
+      index = swiper.activeIndex;
+    }
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
   },
 
+  
   didUpdateAttrs() {
     this._super(...arguments);
 
@@ -227,9 +234,24 @@ export default Component.extend({
 
       if (this.get('loop')) {
         let swiper = this.get('_swiper');
-        index = $(swiper.slides)
-          .filter(`[data-swiper-slide-index=${this.get('currentSlide')}]`)
-          .prevAll().length;
+
+        function prevAll(element) {
+          let result = [];
+        
+          while (element = element.previousElementSibling) { /* eslint-disable-line no-cond-assign */
+            result.push(element);
+          }
+          return result;
+        }
+
+        Object.keys(swiper.slides).forEach((key) => {
+          if (swiper.slides[key].classList) {
+            if (swiper.slides[key].getAttribute('data-swiper-slide-index') === this.get('currentSlide')) {
+              index = prevAll(swiper.slides[key]).length;
+            }
+          }
+        });
+
       }
 
       this.get('_swiper').slideTo(index);
