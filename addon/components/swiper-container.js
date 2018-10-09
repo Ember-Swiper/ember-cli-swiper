@@ -205,14 +205,19 @@ export default Component.extend({
    */
   _slideChanged(swiper) {
     let index;
+
     if (this.get('loop')) {
-      index = swiper.slides
-        .parent()
-        .find('.swiper-slide-active')
-        .attr('data-swiper-slide-index');
+      index = parseInt(
+        swiper.slides
+          .parent()
+          .find('.swiper-slide-active')
+          .attr('data-swiper-slide-index'),
+        10
+      );
     } else {
       index = swiper.realIndex;
     }
+
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
