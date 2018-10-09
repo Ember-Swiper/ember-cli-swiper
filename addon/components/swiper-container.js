@@ -205,32 +205,14 @@ export default Component.extend({
    */
   _slideChanged(swiper) {
     let index;
-
     if (this.get('loop')) {
-      Object.keys(swiper.slides).forEach((key) => {
-        if (swiper.slides[key].classList && swiper.slides[key].classList.contains('swiper-slide-active')) {
-          index = swiper.slides[key].getAttribute('data-swiper-slide-index');
-        }
-      });
+      index = swiper.slides.parent().find('.swiper-slide-active').attr('data-swiper-slide-index');
     } else {
       index = swiper.realIndex;
     }
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
-  },
-  /**
-   * Get all previous elements
-   * @private
-   * @param {Object} DOMElement - A Dom Element
-   * @return {Array}
-  */
-  prevAll(element) {
-    let result = [];
-    while (element = element.previousElementSibling) { /* eslint-disable-line no-cond-assign */
-      result.push(element);
-    }
-    return result;
   },
   didUpdateAttrs() {
     this._super(...arguments);
@@ -242,6 +224,12 @@ export default Component.extend({
 
       if (this.get('loop')) {
         let swiper = this.get('_swiper');
+
+        index = swiper.slides
+          .parent()
+          .find(`[data-swiper-slide-index="${this.get('currentSlide')}"]`)
+          .prevAll().length;
+
         Object.keys(swiper.slides).forEach((key) => {
           if (swiper.slides[key].classList && swiper.slides[key].getAttribute('data-swiper-slide-index') === this.get('currentSlide')) {
             index = this.prevAll(swiper.slides[key]).length;
