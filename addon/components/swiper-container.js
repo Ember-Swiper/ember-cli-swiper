@@ -206,7 +206,10 @@ export default Component.extend({
   _slideChanged(swiper) {
     let index;
     if (this.get('loop')) {
-      index = swiper.slides.parent().find('.swiper-slide-active').attr('data-swiper-slide-index');
+      index = swiper.slides
+        .parent()
+        .find('.swiper-slide-active')
+        .attr('data-swiper-slide-index');
     } else {
       index = swiper.realIndex;
     }
@@ -214,8 +217,10 @@ export default Component.extend({
     this.set('currentSlide', index);
     this.get('onChange')(swiper.slides[swiper.realIndex]);
   },
+
   didUpdateAttrs() {
     this._super(...arguments);
+
     /*
      Data-down Swiper slide activation
      */
@@ -229,13 +234,6 @@ export default Component.extend({
           .parent()
           .find(`[data-swiper-slide-index="${this.get('currentSlide')}"]`)
           .prevAll().length;
-
-        Object.keys(swiper.slides).forEach((key) => {
-          if (swiper.slides[key].classList && swiper.slides[key].getAttribute('data-swiper-slide-index') === this.get('currentSlide')) {
-            index = this.prevAll(swiper.slides[key]).length;
-          }
-        });
-
       }
 
       this.get('_swiper').slideTo(index);
