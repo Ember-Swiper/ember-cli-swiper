@@ -1,4 +1,4 @@
-import { find, findAll, render, click } from '@ember/test-helpers';
+import { find, findAll, render, click, waitFor } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -247,6 +247,32 @@ module('Integration | Component | swiper container', function(hooks) {
       .callThrough();
 
     this.set('updateFor', 'updateTranslate');
+  });
+
+  test('it updates the `currentSlide` when viewing and removing the last item', async function(assert) {
+    this.set('itemList', ['item-1', 'item-2']);
+
+    await render(hbs`
+      {{#swiper-container 
+        navigation=true
+        updateFor=itemList
+        currentSlide=currentSlide
+      }}
+        {{#each itemList as |item|}}
+          {{#swiper-slide}}
+            <p class="{{item}}">{{item}}</p>
+          {{/swiper-slide}}
+        {{/each}}
+      {{/swiper-container}}
+    `);
+
+    await click('.swiper-button-next');
+    await waitFor('.swiper-slide-active .item-2');
+
+    this.set('itemList', ['item-1']);
+    await waitFor('.swiper-slide-active .item-1');
+
+    assert.equal(this.get('currentSlide'), 0);
   });
 
   test('it subscribes `events` actions map as Swiper events', async function(assert) {
