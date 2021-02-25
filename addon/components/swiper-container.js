@@ -1,6 +1,6 @@
 /* globals Swiper */
 import Component from '@ember/component';
-import { getProperties, computed } from '@ember/object';
+import { getProperties } from '@ember/object';
 import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
 import { assign as emAssign } from '@ember/polyfills';
@@ -49,7 +49,7 @@ export default Component.extend({
    * User defined map of Swiper events
    * @type {Object}
    */
-  events: computed(() => Object.create(null)),
+  events: null,
 
   /**
    * Abstraction to invoke `Swiper.update`
@@ -98,7 +98,7 @@ export default Component.extend({
    * @public
    * @type {Object}
    */
-  options: computed(() => ({})),
+  options: null,
 
   /**
    * Get Swiper options from attributes
@@ -271,7 +271,7 @@ export default Component.extend({
     );
 
     // Subscribe configured actions as Swiper events
-    keys(this.get('events')).forEach((evt) =>
+    keys(this.get('events') || {}).forEach((evt) =>
       instance.on(evt, this.get(`events.${evt}`))
     );
 
