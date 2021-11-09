@@ -26,7 +26,8 @@
     "url": "https://github.com/Ember-Swiper/ember-cli-swiper"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.12.0",
+    "ember-auto-import": "^1.11.2",
+    "ember-cli-babel": "6.12.0",
     "ember-cli-htmlbars": "^2.0.1",
     "swiper": "^6.5.1"
   },
@@ -64,5 +65,8 @@
     "demoURL": "https://ember-swiper.github.io/ember-cli-swiper/",
     "before": "ember-cli-sri",
     "configPath": "tests/dummy/config"
+  },
+  "resolutions" : {
+    "ember-cli-babel": "6.12.0"
   }
 }
