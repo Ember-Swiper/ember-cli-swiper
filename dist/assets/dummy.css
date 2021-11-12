@@ -1,0 +1,60 @@
+body {
+  padding-bottom: 5em;
+}
+
+.swiper-container-vertical {
+  height: 200px;
+}
+
+.swiper-wrapper .swiper-slide {
+  color: #fff;
+  height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.swiper-slide-active {
+  font-weight: bold;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.swiper-wrapper .swiper-slide:nth-of-type(1):not(.myslide),
+.swiper-wrapper .swiper-slide.myslide-1 {
+  background-color: #00A0B0;
+}
+
+.swiper-wrapper .swiper-slide:nth-of-type(2):not(.myslide),
+.swiper-wrapper .swiper-slide.myslide-2 {
+  background-color: #6A4A3C;
+}
+
+.swiper-wrapper .swiper-slide:nth-of-type(3):not(.myslide),
+.swiper-wrapper .swiper-slide.myslide-3 {
+  background-color: #CC333F;
+}
+
+.swiper-wrapper .swiper-slide:nth-of-type(4):not(.myslide),
+.swiper-wrapper .swiper-slide.myslide-4 {
+  background-color: #EB6841;
+}
+
+.swiper-wrapper .swiper-slide:nth-of-type(5):not(.myslide),
+.swiper-wrapper .swiper-slide.myslide-5 {
+  background-color: #EDC951;
+}
+
+@media screen and (max-width: 840px) {
+  .measure {
+    padding: 1em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .measure h1 {
+    margin: 1.5em 0;
+    font-size: 2em;
+  }
+}
