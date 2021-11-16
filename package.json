@@ -65,8 +65,5 @@
     "demoURL": "https://ember-swiper.github.io/ember-cli-swiper/",
     "before": "ember-cli-sri",
     "configPath": "tests/dummy/config"
-  },
-  "resolutions" : {
-    "ember-cli-babel": "6.12.0"
   }
 }
