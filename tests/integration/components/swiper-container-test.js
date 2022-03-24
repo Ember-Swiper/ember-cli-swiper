@@ -1,4 +1,4 @@
-import { find, findAll, render, click, waitFor } from '@ember/test-helpers';
+import { find, findAll, render, click, waitFor, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -137,7 +137,7 @@ module('Integration | Component | swiper container', function(hooks) {
   test('it supports `effect` attribute', async function(assert) {
     await render(hbs`{{swiper-container id="swp-container" effect="fade"}}`);
     assert.ok(
-      find('#swp-container.swiper-container-fade'),
+      find('#swp-container.swiper-fade'),
       'Container has `fade` class'
     );
   });
@@ -253,7 +253,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('itemList', ['item-1', 'item-2']);
 
     await render(hbs`
-      {{#swiper-container 
+      {{#swiper-container
         navigation=true
         updateFor=itemList
         currentSlide=currentSlide
@@ -309,13 +309,15 @@ module('Integration | Component | swiper container', function(hooks) {
     };
 
     await render(hbs`
-      {{#swiper-container autoplay=(hash delay=10) currentSlide=1 events=(hash
+      {{#swiper-container autoplay=(hash delay=0) currentSlide=1 events=(hash
         autoplay=(action "onAutoplay")) as |sc|}}
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
       {{/swiper-container}}
     `);
+
+    await settled();
   });
 
   test('it exposes default swiper navigation controls to `navigation=true`', async function(assert) {

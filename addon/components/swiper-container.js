@@ -1,4 +1,4 @@
-/* globals Swiper */
+import Swiper from 'swiper/bundle';
 import Component from '@ember/component';
 import { getProperties } from '@ember/object';
 import { once } from '@ember/runloop';
