@@ -4,8 +4,15 @@ Simple ember-wrapper around [Swiper by idangerous](https://idangero.us/swiper/de
 
 See the [demo](https://ember-swiper.github.io/ember-cli-swiper/) for examples and usage-infos.
 
-Installation
-------------------------------------------------------------------------------
+
+## Compatibility
+
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
+* Node.js v14 or above
+
+
+## Installation
 
 `ember install ember-cli-swiper`
 
@@ -50,4 +57,13 @@ Please note that attribute values will overwrite any conflicting options.
 
 ## Running tests
 
+
 `ember test`
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
