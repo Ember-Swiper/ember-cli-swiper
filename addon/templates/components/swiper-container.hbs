@@ -2,11 +2,11 @@
   {{yield (hash slide=(component "swiper-slide"))}}
 </ul>
 
-{{#if hasPagination}}
+{{#if this.hasPagination}}
   <div class="swiper-pagination"></div>
 {{/if}}
 
-{{#if hasNavigation}}
-  <div class="{{nextElClass}}"></div>
-  <div class="{{prevElClass}}"></div>
+{{#if this.hasNavigation}}
+  <div class={{this.nextElClass}}></div>
+  <div class={{this.prevElClass}}></div>
 {{/if}}
