@@ -8,27 +8,27 @@ module('Integration | Component | swiper slide', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`{{swiper-slide}}`);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     await render(hbs`
       {{#swiper-slide}}
         template block text
       {{/swiper-slide}}
     `);
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 
   test('predefined classes are added', async function(assert) {
     await render(hbs`{{swiper-slide id="slide"}}`);
-    assert.ok(find('#slide').classList.contains('swiper-slide'));
+    assert.dom('#slide').hasClass('swiper-slide');
 
     await render(hbs`{{swiper-slide id="slide" class="foo bar"}}`);
-    assert.ok(find('#slide').classList.contains('swiper-slide'));
+    assert.dom('#slide').hasClass('swiper-slide');
   });
 
   test('own classes are added', async function(assert) {
     await render(hbs`{{swiper-slide id="slide" class="foo bar"}}`);
-    assert.ok(find('#slide').classList.contains('foo'));
-    assert.ok(find('#slide').classList.contains('bar'));
+    assert.dom('#slide').hasClass('foo');
+    assert.dom('#slide').hasClass('bar');
   });
 });

@@ -107,7 +107,7 @@ export default Component.extend({
    */
   _getOptions() {
     let attrs = getProperties(this, ...keys(this.attrs)); // eslint-disable-line ember/no-attrs-in-components
-    let options = assign({}, this.get('options'), attrs);
+    let options = assign({}, this.options, attrs);
 
     // Overwrite pagination element selector
     if (options.pagination) {
@@ -126,7 +126,7 @@ export default Component.extend({
         {
           el:
             customPaginationEl
-            || `#${this.get('elementId')} > .swiper-pagination`
+            || `#${this.elementId} > .swiper-pagination`
         }
       );
     }
@@ -148,8 +148,8 @@ export default Component.extend({
       // Ensure `nextEl` & `prevEl` required options set
       // and that navigation inherits from Object.prototype
       options.navigation = assign({}, options.navigation, {
-        nextEl: `.${this.get('nextElClass')}`,
-        prevEl: `.${this.get('prevElClass')}`
+        nextEl: `.${this.nextElClass}`,
+        prevEl: `.${this.prevElClass}`
       });
     }
 
@@ -194,8 +194,8 @@ export default Component.extend({
    * @public
    */
   forceUpdate() {
-    this.get('_swiper').update();
-    this.get('_swiper').slideTo(this.get('currentSlide'));
+    this._swiper.update();
+    this._swiper.slideTo(this.currentSlide);
   },
 
   /**
@@ -206,7 +206,7 @@ export default Component.extend({
   _slideChanged(swiper) {
     let index;
 
-    if (this.get('loop')) {
+    if (this.loop) {
       index = parseInt(
         swiper.slides
           .parent()
@@ -220,7 +220,7 @@ export default Component.extend({
 
     this.set('_currentSlideInternal', index);
     this.set('currentSlide', index);
-    this.get('onChange')(swiper.slides[swiper.realIndex]);
+    this.onChange(swiper.slides[swiper.realIndex]);
   },
 
   didUpdateAttrs() {
@@ -229,28 +229,28 @@ export default Component.extend({
     /*
      Data-down Swiper slide activation
      */
-    if (this.get('currentSlide') !== this.get('_currentSlideInternal')) {
-      let index = this.get('currentSlide');
+    if (this.currentSlide !== this._currentSlideInternal) {
+      let index = this.currentSlide;
 
-      if (this.get('loop')) {
-        let swiper = this.get('_swiper');
+      if (this.loop) {
+        let swiper = this._swiper;
 
         index = swiper.slides
           .parent()
-          .find(`[data-swiper-slide-index="${this.get('currentSlide')}"]`)
+          .find(`[data-swiper-slide-index="${this.currentSlide}"]`)
           .prevAll().length;
       }
 
-      this.get('_swiper').slideTo(index);
-      this.set('_currentSlideInternal', this.get('currentSlide'));
+      this._swiper.slideTo(index);
+      this.set('_currentSlideInternal', this.currentSlide);
     }
 
     /*
      Trigger `update()` of swiper
      */
-    if (this.get('updateFor') !== this.get('_updateForInternal')) {
-      once(this.get('_swiper'), 'update');
-      this.set('_updateForInternal', this.get('updateFor'));
+    if (this.updateFor !== this._updateForInternal) {
+      once(this._swiper, 'update');
+      this.set('_updateForInternal', this.updateFor);
     }
   },
 
@@ -259,11 +259,11 @@ export default Component.extend({
     this.set('registerAs', this);
 
     let swiperOptions = assign(
-      { initialSlide: this.get('currentSlide') },
+      { initialSlide: this.currentSlide },
       this._getOptions()
     );
 
-    let transitionEvent = this.get('loop') ? 'slideChangeTransitionEnd' : 'slideChange';
+    let transitionEvent = this.loop ? 'slideChangeTransitionEnd' : 'slideChange';
     let instance = this.set('_swiper', new Swiper(this.element, swiperOptions));
     instance.on(
       transitionEvent,
@@ -271,7 +271,7 @@ export default Component.extend({
     );
 
     // Subscribe configured actions as Swiper events
-    keys(this.get('events') || {}).forEach((evt) =>
+    keys(this.events || {}).forEach((evt) =>
       instance.on(evt, this.get(`events.${evt}`))
     );
 
@@ -283,7 +283,7 @@ export default Component.extend({
 
   willDestroyElement() {
     this._super(...arguments);
-    let instance = this.get('_swiper');
+    let instance = this._swiper;
 
     if (instance) {
       instance.off('slideChangeTransitionEnd');

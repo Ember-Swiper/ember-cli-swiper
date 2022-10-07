@@ -9,7 +9,7 @@ export default Controller.extend({
 
   actions: {
     addToHistory(newElement) {
-      this.set('selectionHistory', `${jQ(newElement).text()}${this.get('selectionHistory')}`);
+      this.set('selectionHistory', `${jQ(newElement).text()}${this.selectionHistory}`);
     },
 
     goToTwo() {
