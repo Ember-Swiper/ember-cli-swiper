@@ -15,13 +15,13 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('it renders', async function(assert) {
-    await render(hbs`{{swiper-container}}`);
+    await render(hbs`<SwiperContainer />`);
     assert.equal(find('*').textContent.trim(), '');
 
     await render(hbs`
-      {{#swiper-container}}
+      <SwiperContainer>
         template block text
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
     assert.equal(find('*').textContent.trim(), 'template block text');
   });
@@ -31,7 +31,7 @@ module('Integration | Component | swiper container', function(hooks) {
 
     this.set('noSwiping', expected);
     await render(
-      hbs`{{swiper-container noSwiping=noSwiping registerAs=componentInstanceAttr}}`
+      hbs`<SwiperContainer @noSwiping={{this.noSwiping}} @registerAs={{this.componentInstanceAttr}} />`
     );
 
     assert.strictEqual(
@@ -42,7 +42,7 @@ module('Integration | Component | swiper container', function(hooks) {
 
     this.set('options', { noSwiping: expected });
     await render(
-      hbs`{{swiper-container options=options registerAs=componentInstanceOpts}}`
+      hbs`<SwiperContainer @options={{this.options}} @registerAs={{this.componentInstanceOpts}} />`
     );
 
     assert.strictEqual(
@@ -58,7 +58,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('effect', expected);
     this.set('options', { effect: 'cube' });
     await render(
-      hbs`{{swiper-container effect=effect options=options registerAs=componentInstanceAttr}}`
+      hbs`<SwiperContainer @effect={{this.effect}} @options={{this.options}} @registerAs={{this.componentInstanceAttr}} />`
     );
 
     assert.strictEqual(
@@ -69,30 +69,30 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('predefined classes are added', async function(assert) {
-    await render(hbs`{{swiper-container}}`);
+    await render(hbs`<SwiperContainer />`);
     assert.ok(find('.swiper-container'));
   });
 
   test('contains the wrapper', async function(assert) {
-    await render(hbs`{{swiper-container id="swp-container"}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" />`);
     assert.ok(find('#swp-container').querySelector('.swiper-wrapper'));
   });
 
   test('pagination node is present if requested', async function(assert) {
-    await render(hbs`{{swiper-container id="swp-container" pagination=false}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @pagination={{false}} />`);
     assert.notOk(
       find('#swp-container').querySelector('.swiper-pagination'),
       'pagination not rendered'
     );
 
-    await render(hbs`{{swiper-container id="swp-container" pagination=true}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @pagination={{true}} />`);
     assert.ok(
       find('#swp-container').querySelector('.swiper-pagination'),
       'pagination is rendered'
     );
 
     await render(
-      hbs`{{swiper-container pagination=".custom-pagination"}}<div class="custom-pagination"></div>`
+      hbs`<SwiperContainer @pagination=".custom-pagination" /><div class="custom-pagination"></div>`
     );
     assert.ok(
       find('.custom-pagination').classList.contains(
@@ -102,7 +102,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
 
     await render(
-      hbs`{{swiper-container pagination=(hash el=".custom-pagination")}}<div class="custom-pagination"></div>`
+      hbs`<SwiperContainer @pagination={{hash el=".custom-pagination"}} /><div class="custom-pagination"></div>`
     );
     assert.ok(
       find('.custom-pagination').classList.contains(
@@ -112,7 +112,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
 
     this.set('opts', { pagination: { type: 'progressbar' } });
-    await render(hbs`{{swiper-container id="swp-container" options=opts}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @options={{this.opts}} />`);
     assert.ok(
       find('#swp-container').querySelector('.swiper-pagination-progressbar'),
       'pagination object rendered'
@@ -120,22 +120,22 @@ module('Integration | Component | swiper container', function(hooks) {
   });
 
   test('navigation buttons are present if requested', async function(assert) {
-    await render(hbs`{{swiper-container id="swp-container" navigation=false}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @navigation={{false}} />`);
     assert.notOk(find('#swp-container').querySelector('.swiper-button-next'));
     assert.notOk(find('#swp-container').querySelector('.swiper-button-prev'));
 
-    await render(hbs`{{swiper-container id="swp-container" navigation=true}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @navigation={{true}} />`);
     assert.ok(find('#swp-container').querySelector('.swiper-button-next'));
     assert.ok(find('#swp-container').querySelector('.swiper-button-prev'));
 
     this.set('opts', { navigation: true });
-    await render(hbs`{{swiper-container id="swp-container" options=opts}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @options={{this.opts}} />`);
     assert.ok(find('#swp-container').querySelector('.swiper-button-next'));
     assert.ok(find('#swp-container').querySelector('.swiper-button-prev'));
   });
 
   test('it supports `effect` attribute', async function(assert) {
-    await render(hbs`{{swiper-container id="swp-container" effect="fade"}}`);
+    await render(hbs`<SwiperContainer @id="swp-container" @effect="fade" />`);
     assert.ok(
       find('#swp-container.swiper-fade'),
       'Container has `fade` class'
@@ -148,7 +148,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('active', true);
 
     await render(
-      hbs`{{#if active}}{{swiper-container registerAs=componentInstance}}{{/if}}`
+      hbs`{{#if this.active}}<SwiperContainer @registerAs={{this.componentInstance}} />{{/if}}`
     );
 
     run(() => {
@@ -169,7 +169,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('rendered', true);
 
     await render(
-      hbs`{{#if rendered}}{{swiper-container registerAs=componentInstance}}{{/if}}`
+      hbs`{{#if this.rendered}}<SwiperContainer @registerAs={{this.componentInstance}} />{{/if}}`
     );
 
     let componentInstance = this.get('componentInstance');
@@ -195,17 +195,17 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('it yields a slide component', async function(assert) {
     await render(
-      hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`
+      hbs`<SwiperContainer as |container|>{{container.slide}}</SwiperContainer>`
     );
     assert.equal(findAll('.swiper-slide').length, 1, 'renders a single slide');
   });
 
   test('it activates the slide at index `currentSlide` on render', async function(assert) {
     await render(hbs`
-      {{#swiper-container currentSlide=1}}
+      <SwiperContainer @currentSlide={{1}}>
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}`);
+      </SwiperContainer>`);
 
     let lastSlide = Array.from(findAll('.swiper-slide')).pop();
 
@@ -219,10 +219,10 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('currentSlide', 0);
 
     await render(hbs`
-      {{#swiper-container currentSlide=currentSlide}}
+      <SwiperContainer @currentSlide={{this.currentSlide}}>
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}`);
+      </SwiperContainer>`);
 
     this.set('currentSlide', 1);
 
@@ -237,7 +237,7 @@ module('Integration | Component | swiper container', function(hooks) {
   test('it triggers `swiper.update()` when `updateFor` is updated', async function(assert) {
     this.set('updateFor', '');
     await render(hbs`
-      {{swiper-container updateFor=updateFor registerAs=componentInstance}}`);
+      <SwiperContainer @updateFor={{this.updateFor}} @registerAs={{this.componentInstance}} />`);
 
     let componentInstance = this.get('componentInstance');
 
@@ -253,17 +253,17 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('itemList', ['item-1', 'item-2']);
 
     await render(hbs`
-      {{#swiper-container
-        navigation=true
-        updateFor=itemList
-        currentSlide=currentSlide
-      }}
-        {{#each itemList as |item|}}
-          {{#swiper-slide}}
+      <SwiperContainer
+        @navigation={{true}}
+        @updateFor={{this.itemList}}
+        @currentSlide={{this.currentSlide}}
+      >
+        {{#each this.itemList as |item|}}
+          <SwiperSlide>
             <p class="{{item}}">{{item}}</p>
-          {{/swiper-slide}}
+          </SwiperSlide>
         {{/each}}
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
 
     await click('.swiper-button-next');
@@ -279,7 +279,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.actions.onBeforeDestroy = () => assert.ok(true);
 
     await render(hbs`
-      {{swiper-container events=(hash beforeDestroy=(action "onBeforeDestroy"))}}`);
+      <SwiperContainer @events={{hash beforeDestroy=(action "onBeforeDestroy")}} />`);
   });
 
   test('it supports manual swiper initialization when `init` event configured', async function(assert) {
@@ -287,7 +287,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.actions.onInit = () => assert.ok(true, 'invoked init handler');
 
     await render(hbs`
-      {{swiper-container registerAs=componentInstance events=(hash init=(action "onInit"))}}`);
+      <SwiperContainer @registerAs={{this.componentInstance}} @events={{hash init=(action "onInit")}} />`);
   });
 
   test('it triggers `autoplay` with custom `currentSlide`', async function(assert) {
@@ -309,12 +309,12 @@ module('Integration | Component | swiper container', function(hooks) {
     };
 
     await render(hbs`
-      {{#swiper-container autoplay=(hash delay=0) currentSlide=1 events=(hash
-        autoplay=(action "onAutoplay")) as |sc|}}
+      <SwiperContainer @autoplay={{hash delay=0}} @currentSlide={{1}} @events={{hash
+        autoplay=(action "onAutoplay")}} as |sc|>
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
 
     await settled();
@@ -322,11 +322,11 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('it exposes default swiper navigation controls to `navigation=true`', async function(assert) {
     await render(hbs`
-      {{#swiper-container navigation=true}}
+      <SwiperContainer @navigation={{true}}>
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
 
     assert.ok(find('.swiper-button-next'), 'rendered nav next button');
@@ -351,11 +351,11 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('it applies custom navigation hash of control selectors', async function(assert) {
     await render(hbs`
-      {{#swiper-container navigation=(hash nextEl=".is-next" prevEl=".is-last")}}
+      <SwiperContainer @navigation={{hash nextEl=".is-next" prevEl=".is-last"}}>
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
 
     assert.ok(find('.is-next'), 'rendered custom nav next button');
@@ -364,11 +364,11 @@ module('Integration | Component | swiper container', function(hooks) {
 
   test('it applies custom `navigation.disabledClass`', async function(assert) {
     await render(hbs`
-      {{#swiper-container navigation=(hash disabledClass="is-disabled")}}
+      <SwiperContainer @navigation={{hash disabledClass="is-disabled"}}>
         {{swiper-slide}}
         {{swiper-slide}}
         {{swiper-slide}}
-      {{/swiper-container}}
+      </SwiperContainer>
     `);
 
     assert.ok(find('.is-disabled'), 'rendered custom disabled class');
@@ -379,7 +379,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('componentInstance', null);
 
     await render(
-      hbs`{{swiper-container registerAs=componentInstance updateFor=updateForValue}}`
+      hbs`<SwiperContainer @registerAs={{this.componentInstance}} @updateFor={{this.updateForValue}} />`
     );
 
     let swiperInstance = this.get('componentInstance._swiper');
