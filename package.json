@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-swiper",
+  "name": "@yogaglo/ember-cli-swiper",
   "version": "1.0.6",
   "description": "Enables touchfriendly, swipeable, carousel-like slides through nolimits4web/Swiper",
   "keywords": [
@@ -20,6 +20,9 @@
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/yogaglo"
   },
   "repository": {
     "type": "git",
