@@ -3,13 +3,12 @@ import Component from '@ember/component';
 import { getProperties } from '@ember/object';
 import { once } from '@ember/runloop';
 import { warn } from '@ember/debug';
-import { assign as emAssign } from '@ember/polyfills';
 import { or } from '@ember/object/computed';
 
 import layout from '../templates/components/swiper-container';
 
 const { keys } = Object;
-const assign = Object.assign || emAssign;
+const assign = Object.assign;
 
 const EMBER_CLI_SWIPER_OPTIONS = [
   'options',
