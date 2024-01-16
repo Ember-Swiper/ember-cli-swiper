@@ -1,3 +1,7 @@
+# Archived: Not adviced to use anymore
+
+This repository wasn't actively maintained for quite a while now. Thus the original author of it decided to set it to read-only.
+
 # Ember-cli-swiper [![Build Status](https://travis-ci.org/Ember-Swiper/ember-cli-swiper.svg?branch=master)](https://travis-ci.org/Ember-Swiper/ember-cli-swiper) [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-swiper.svg)](https://emberobserver.com/addons/ember-cli-swiper) [![Code Climate](https://codeclimate.com/github/Ember-Swiper/ember-cli-swiper/badges/gpa.svg)](https://codeclimate.com/github/Ember-Swiper/ember-cli-swiper)
 
 Simple ember-wrapper around [Swiper by idangerous](https://idangero.us/swiper/demos/).
